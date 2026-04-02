@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const ITEMS = [
@@ -49,12 +50,12 @@ export default function MenuPreview() {
               Signature Selections
             </h2>
           </div>
-          <a
-            href="#menus"
+          <Link
+            href="/menus"
             className="shrink-0 font-body text-[11px] tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
           >
             Full Menu &rarr;
-          </a>
+          </Link>
         </div>
 
         {/* Items */}

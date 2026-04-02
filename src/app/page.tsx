@@ -63,7 +63,7 @@ export default function Home() {
           />
 
           {/* Title */}
-          <h1 className="hero-title font-display font-light uppercase text-cream tracking-[8px] text-[clamp(48px,8vw,96px)] leading-[1.1]">
+          <h1 className="hero-title font-display font-light uppercase text-cream tracking-[8px] text-[clamp(36px,8vw,96px)] leading-[1.1] whitespace-nowrap">
             La Victoria
           </h1>
 

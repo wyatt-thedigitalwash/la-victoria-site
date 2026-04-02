@@ -102,7 +102,7 @@ section[data-bg="surface"] + section[data-bg="surface"] {
 @keyframes hero-title-in {
   from {
     opacity: 0;
-    letter-spacing: 14px;
+    letter-spacing: 12px;
   }
   to {
     opacity: 1;
