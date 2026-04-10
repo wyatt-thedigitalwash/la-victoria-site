@@ -11,7 +11,7 @@ const PANELS = [
   {
     title: "Kitchen",
     description:
-      "Wood-fired traditions reimagined through the lens of Mexico\u2019s culinary heritage. Every dish tells a story of land and flame.",
+      "A space where Mexican culinary tradition is honored through refined technique and contemporary execution. Craftsmanship, depth of flavor, and heritage recipes elevated.",
     image: "/assets/kitchen.jpg",
     alt: "Wood-fired kitchen with open flames and plated dishes at La Victoria",
     href: "#kitchen-menu",
@@ -19,7 +19,7 @@ const PANELS = [
   {
     title: "Crudo",
     description:
-      "Gulf-to-glass freshness. Raw, cured, and ceviched preparations that honor the sea with precision and restraint.",
+      "Rooted in coastal Mexican traditions, celebrating fresh ingredients with restraint and precision. Bold simplicity, vibrant textures, and raw elegance at their peak.",
     image: "/assets/crudo.jpg",
     alt: "Fresh crudo preparations with citrus and microgreens at the raw bar",
     href: "#crudo-menu",
@@ -27,7 +27,7 @@ const PANELS = [
   {
     title: "Cantina",
     description:
-      "Mezcal-forward cocktails, rare tequilas, and agave spirits served at the green marble bar. A destination in itself.",
+      "Inspired by the timeless Mexican cantina, representing conviviality, storytelling, and ritual. Curated spirits, artisanal cocktails, and celebratory energy.",
     image: "/assets/cantina.jpg",
     alt: "Mezcal cocktails and agave spirits at the green marble cantina bar",
     href: "#cantina-menu",
@@ -39,43 +39,46 @@ export default function Home() {
     <main>
       <section
         id="home"
-        data-bg="deep"
         className="relative flex min-h-screen items-center justify-center overflow-hidden"
       >
-        {/* Atmospheric background */}
-        <div className="absolute inset-0 bg-deep" />
+        {/* Background image */}
+        <Image
+          src="/assets/cactus-video.png"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-deep/60" />
         <div className="hero-glow absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(139,58,47,0.12)_0%,_transparent_70%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(74,107,90,0.08)_0%,_transparent_70%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(184,151,106,0.06)_0%,_transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(77,24,7,0.12)_0%,_transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(124,101,51,0.08)_0%,_transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(244,212,124,0.06)_0%,_transparent_70%)]" />
         </div>
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center text-center px-6">
-          {/* Logo mark */}
+          {/* Title */}
+          <h1 className="sr-only">La Victoria</h1>
           <Image
-            src="/assets/la-victoria-logo-white.png"
-            alt="La Victoria logo"
-            width={90}
-            height={110}
+            src="/assets/La-Victoria-title-only.svg"
+            alt="La Victoria"
+            width={600}
+            height={133}
             priority
-            className="hero-logo w-[70px] md:w-[90px] h-auto mb-8"
+            className="hero-title w-[438px] md:w-[703px] h-auto"
           />
 
-          {/* Title */}
-          <h1 className="hero-title font-display font-light uppercase text-cream tracking-[8px] text-[clamp(36px,8vw,96px)] leading-[1.1] whitespace-nowrap">
-            La Victoria
-          </h1>
-
           {/* Subtitle */}
-          <p className="hero-subtitle font-body text-[12px] font-normal tracking-[6px] uppercase text-brass mt-5">
-            Kitchen&ensp;·&ensp;Crudo&ensp;·&ensp;Cantina
+          <p className="hero-subtitle font-mono text-[12px] tracking-[6px] uppercase text-brass mt-5">
+            Kitchen&ensp;&middot;&ensp;Crudo&ensp;&middot;&ensp;Cantina
           </p>
 
           {/* CTA */}
           <a
             href="#reserve"
-            className="hero-cta group relative inline-block mt-10 font-body text-[11px] font-medium tracking-[3px] uppercase text-cream border border-brass/40 px-8 py-3.5 overflow-hidden transition-colors duration-500"
+            className="hero-cta group relative inline-block mt-10 font-mono text-[11px] tracking-[3px] uppercase text-cream border border-brass/40 px-8 py-3.5 overflow-hidden transition-colors duration-500"
           >
             <span className="absolute inset-0 origin-left scale-x-0 bg-terracotta transition-transform duration-500 group-hover:scale-x-100" />
             <span className="relative">Reserve a Table</span>
@@ -88,13 +91,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Triptych ── */}
+      {/* -- Triptych -- */}
       <section
         id="menus"
         data-bg="deep"
         className="py-[140px] px-6"
       >
-        <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass text-center mb-20">
+        <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass text-center mb-20">
           Three Experiences, One Destination
         </p>
 
@@ -103,7 +106,7 @@ export default function Home() {
             <ScrollReveal key={panel.title} delay={i * 150}>
               <a
                 href={panel.href}
-                className="group relative block h-[50vh] min-h-[350px] md:h-[70vh] md:min-h-[500px] overflow-hidden cursor-pointer"
+                className="group relative block h-[50vh] min-h-[350px] md:h-[65vh] md:min-h-[450px] overflow-hidden cursor-pointer"
               >
                 {/* Photo */}
                 <Image
@@ -112,21 +115,21 @@ export default function Home() {
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
                   priority
-                  className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-105"
+                  className="object-cover object-center scale-[1.02] transition-transform duration-[600ms] ease-out group-hover:scale-[1.05]"
                 />
 
                 {/* Bottom gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/5" />
+                <div className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/30 to-deep/5" />
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <h3 className="font-display italic text-[36px] text-cream leading-tight">
+                  <h3 className="font-body font-light italic text-[36px] text-cream leading-tight">
                     {panel.title}
                   </h3>
                   <p className="font-body text-[14px] text-sand mt-2 max-w-[280px] leading-relaxed">
                     {panel.description}
                   </p>
-                  <span className="inline-block mt-4 font-body text-[11px] font-medium tracking-[2px] uppercase text-brass opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                  <span className="inline-block mt-4 font-mono text-[11px] tracking-[2px] uppercase text-brass opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
                     View Menu &rarr;
                   </span>
                 </div>
@@ -136,22 +139,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Philosophy ── */}
+      {/* -- Philosophy -- */}
       <Philosophy />
 
-      {/* ── Gallery ── */}
+      {/* -- Gallery -- */}
       <Gallery />
 
-      {/* ── Menu Preview ── */}
+      {/* -- Menu Preview -- */}
       <MenuPreview />
 
-      {/* ── Reservation CTA ── */}
+      {/* -- Reservation CTA -- */}
       <ReservationCta />
 
-      {/* ── Location ── */}
+      {/* -- Location -- */}
       <Location />
 
-      {/* ── Footer ── */}
+      {/* -- Footer -- */}
       <Footer />
     </main>
   );

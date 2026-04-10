@@ -50,7 +50,7 @@ export default function Philosophy() {
           <p
             key={i}
             data-reveal
-            className="philosophy-line font-display italic font-light text-cream text-[clamp(32px,5vw,64px)] leading-[1.4] mb-4"
+            className="philosophy-line font-body font-light italic text-cream text-[clamp(32px,5vw,64px)] leading-[1.4] mb-4"
             style={{ transitionDelay: `${i * 200}ms` }}
           >
             {line}

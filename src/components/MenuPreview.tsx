@@ -43,16 +43,16 @@ export default function MenuPreview() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-10 mb-10 border-b border-brass/15">
           <div>
-            <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-3">
+            <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-3">
               From the Kitchen
             </p>
-            <h2 className="font-display font-light text-cream text-[clamp(28px,4vw,48px)] leading-[1.3]">
+            <h2 className="font-body font-light italic text-cream text-[clamp(28px,4vw,48px)] leading-[1.3]">
               Signature Selections
             </h2>
           </div>
           <Link
             href="/menus"
-            className="shrink-0 font-body text-[11px] tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
+            className="shrink-0 font-mono text-[11px] tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
           >
             Full Menu &rarr;
           </Link>
@@ -65,11 +65,11 @@ export default function MenuPreview() {
               <div className="menu-item group grid grid-cols-1 md:grid-cols-[1fr_auto] gap-2 md:gap-8 py-9 border-b border-brass/8 cursor-pointer transition-all duration-400">
                 <div>
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="font-display text-[28px] font-normal text-cream transition-colors duration-400 group-hover:text-terracotta">
+                    <span className="font-body text-[28px] text-cream transition-colors duration-400 group-hover:text-terracotta">
                       {item.name}
                     </span>
                     {item.tag && (
-                      <span className="font-body text-[9px] font-medium tracking-[1.5px] uppercase text-verde/80 border border-verde/30 px-2 py-0.5 leading-none">
+                      <span className="font-mono text-[9px] tracking-[1.5px] uppercase text-verde/80 border border-verde/30 px-2 py-0.5 leading-none">
                         {item.tag}
                       </span>
                     )}
@@ -78,7 +78,7 @@ export default function MenuPreview() {
                     {item.desc}
                   </p>
                 </div>
-                <span className="font-display text-[22px] font-normal text-brass whitespace-nowrap md:self-center">
+                <span className="font-body text-[22px] font-medium text-brass whitespace-nowrap md:self-center">
                   ${item.price}
                 </span>
               </div>

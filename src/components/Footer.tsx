@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Menus", href: "/menus" },
   { label: "Reservations", href: "#" },
   { label: "Private Events", href: "/private-events" },
-  { label: "Our Story", href: "/#story" },
+  { label: "The Space", href: "/the-space" },
   { label: "Visit", href: "/contact" },
 ];
 
@@ -12,42 +13,14 @@ export default function Footer() {
   return (
     <footer data-bg="deep" className="bg-deep border-t border-brass/8 pt-20 pb-10 md:pt-20 md:pb-10 px-6">
       <div className="mx-auto max-w-[1200px] flex flex-col items-center">
-        {/* Arch SVG */}
-        <svg
-          viewBox="0 0 90 110"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-[50px] mb-10 opacity-60"
-          aria-hidden="true"
-        >
-          <line x1="45" y1="0" x2="45" y2="10" stroke="#B8976A" strokeWidth="1" />
-          <line x1="41" y1="4" x2="49" y2="4" stroke="#B8976A" strokeWidth="1" />
-          <path
-            d="M15 100 L15 40 A30 30 0 0 1 75 40 L75 100"
-            stroke="#B8976A"
-            strokeWidth="1"
-            fill="none"
-          />
-          <path
-            d="M28 100 L28 50 A17 17 0 0 1 62 50 L62 100"
-            stroke="#B8976A"
-            strokeWidth="0.8"
-            opacity="0.4"
-            fill="none"
-          />
-          <ellipse
-            cx="45"
-            cy="55"
-            rx="10"
-            ry="14"
-            stroke="#B8976A"
-            strokeWidth="0.8"
-            fill="none"
-          />
-          <line x1="15" y1="100" x2="15" y2="108" stroke="#B8976A" strokeWidth="1" />
-          <line x1="75" y1="100" x2="75" y2="108" stroke="#B8976A" strokeWidth="1" />
-          <line x1="12" y1="108" x2="78" y2="108" stroke="#B8976A" strokeWidth="1" />
-        </svg>
+        {/* Logo */}
+        <Image
+          src="/assets/La-Victoria-icon-beige.png"
+          alt="La Victoria"
+          width={68}
+          height={68}
+          className="w-[68px] h-auto mb-10"
+        />
 
         {/* Nav links */}
         <nav className="flex flex-wrap justify-center gap-6 md:gap-9 mb-8">

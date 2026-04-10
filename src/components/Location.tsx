@@ -19,11 +19,11 @@ export default function Location() {
     >
       {/* Info column */}
       <div className="bg-charcoal py-20 md:py-20 px-6 md:px-16">
-        <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-6">
+        <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-6">
           Find Us
         </p>
 
-        <address className="not-italic font-display text-[28px] text-cream leading-[1.5] mb-10">
+        <address className="not-italic font-body font-light italic text-[28px] text-cream leading-[1.5] mb-10">
           105 W Tyler Street
           <br />
           Tampa, Florida 33602
@@ -46,7 +46,7 @@ export default function Location() {
           href={MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-10 font-body text-[11px] font-medium tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
+          className="inline-block mt-10 font-mono text-[11px] tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
         >
           Get Directions &rarr;
         </a>

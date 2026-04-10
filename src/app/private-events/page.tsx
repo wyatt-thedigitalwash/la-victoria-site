@@ -26,15 +26,15 @@ export default function PrivateEventsPage() {
       {/* Hero banner */}
       <section className="relative flex items-center justify-center min-h-[45vh] min-h-[max(45vh,320px)] overflow-hidden pt-[72px]">
         <div className="absolute inset-0 bg-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(139,58,47,0.1)_0%,_transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(74,107,90,0.07)_0%,_transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(184,151,106,0.05)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(77,24,7,0.1)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(124,101,51,0.07)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(244,212,124,0.05)_0%,_transparent_70%)]" />
 
         <div className="relative z-10 text-center px-6">
-          <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-5">
+          <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-5">
             Private Events
           </p>
-          <h1 className="font-display italic font-light text-cream text-[clamp(32px,5vw,56px)] leading-[1.2]">
+          <h1 className="font-body font-light italic text-cream text-[clamp(32px,5vw,56px)] leading-[1.2]">
             Your evening, our stage
           </h1>
         </div>
@@ -46,7 +46,7 @@ export default function PrivateEventsPage() {
           {/* Left column -- info */}
           <ScrollReveal>
             <div>
-              <p className="font-display italic font-light text-[22px] text-cream leading-[1.6] mb-12">
+              <p className="font-body font-light italic text-[22px] text-cream leading-[1.6] mb-12">
                 La Victoria offers an intimate private dining room perfect for
                 celebrations, corporate gatherings, and milestone events. Our team
                 will work with you to create a custom menu and curated cocktail
@@ -55,7 +55,7 @@ export default function PrivateEventsPage() {
 
               {DETAILS.map((d) => (
                 <div key={d.label} className="mb-8">
-                  <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-2">
+                  <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-2">
                     {d.label}
                   </p>
                   <p className="font-body text-[16px] text-cream">{d.value}</p>
@@ -72,7 +72,7 @@ export default function PrivateEventsPage() {
           {/* Right column -- form */}
           <ScrollReveal delay={150}>
             <div className="bg-surface border border-brass/10 p-8 md:p-10">
-              <h2 className="font-display text-[24px] font-normal text-cream mb-8">
+              <h2 className="font-body font-light italic text-[24px] text-cream mb-8">
                 Inquire
               </h2>
 
@@ -81,7 +81,7 @@ export default function PrivateEventsPage() {
                   <div key={f.id}>
                     <label
                       htmlFor={f.id}
-                      className="block font-body text-[11px] font-medium tracking-[1.5px] uppercase text-sand mb-1.5"
+                      className="block font-mono text-[11px] tracking-[1.5px] uppercase text-sand mb-1.5"
                     >
                       {f.label}
                     </label>
@@ -99,7 +99,7 @@ export default function PrivateEventsPage() {
                 <div>
                   <label
                     htmlFor="guests"
-                    className="block font-body text-[11px] font-medium tracking-[1.5px] uppercase text-sand mb-1.5"
+                    className="block font-mono text-[11px] tracking-[1.5px] uppercase text-sand mb-1.5"
                   >
                     Guest Count
                   </label>
@@ -116,7 +116,7 @@ export default function PrivateEventsPage() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block font-body text-[11px] font-medium tracking-[1.5px] uppercase text-sand mb-1.5"
+                    className="block font-mono text-[11px] tracking-[1.5px] uppercase text-sand mb-1.5"
                   >
                     Message
                   </label>
@@ -131,7 +131,7 @@ export default function PrivateEventsPage() {
 
                 <button
                   type="submit"
-                  className="mt-3 w-full bg-terracotta text-cream font-body text-[12px] font-medium tracking-[3px] uppercase py-4 transition-colors duration-300 hover:bg-[#9B4A3F]"
+                  className="mt-3 w-full bg-terracotta text-cream font-mono text-[12px] tracking-[3px] uppercase py-4 transition-colors duration-300 hover:bg-terracotta-glow"
                 >
                   Submit Inquiry
                 </button>

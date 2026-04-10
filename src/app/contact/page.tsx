@@ -23,15 +23,15 @@ export default function ContactPage() {
       {/* Hero banner */}
       <section className="relative flex items-center justify-center min-h-[40vh] min-h-[max(40vh,280px)] overflow-hidden pt-[72px]">
         <div className="absolute inset-0 bg-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(139,58,47,0.1)_0%,_transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(74,107,90,0.07)_0%,_transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(184,151,106,0.05)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(77,24,7,0.1)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(124,101,51,0.07)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(244,212,124,0.05)_0%,_transparent_70%)]" />
 
         <div className="relative z-10 text-center px-6">
-          <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-5">
+          <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-5">
             Visit
           </p>
-          <h1 className="font-display italic font-light text-cream text-[clamp(28px,5vw,48px)] leading-[1.2] mb-3">
+          <h1 className="font-body font-light italic text-cream text-[clamp(28px,5vw,48px)] leading-[1.2] mb-3">
             105 W Tyler Street
           </h1>
           <p className="font-body text-[14px] text-sand tracking-[1px]">
@@ -45,7 +45,7 @@ export default function ContactPage() {
         <div className="mx-auto max-w-[1100px] grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Left column -- info */}
           <div>
-            <h2 className="font-display text-[28px] font-normal text-cream mb-8">
+            <h2 className="font-body text-[28px] font-medium text-cream mb-8">
               Hours
             </h2>
             <div className="max-w-[350px]">
@@ -66,12 +66,12 @@ export default function ContactPage() {
 
             {/* Contact */}
             <div className="mt-12">
-              <h2 className="font-display text-[28px] font-normal text-cream mb-6">
+              <h2 className="font-body text-[28px] font-medium text-cream mb-6">
                 Contact
               </h2>
 
               <div className="mb-6">
-                <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-2">
+                <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-2">
                   Email
                 </p>
                 <p className="font-body text-[15px] text-cream">
@@ -80,7 +80,7 @@ export default function ContactPage() {
               </div>
 
               <div className="mb-8">
-                <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-2">
+                <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-2">
                   Phone
                 </p>
                 <p className="font-body text-[15px] text-cream">
@@ -92,7 +92,7 @@ export default function ContactPage() {
                 href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block font-body text-[11px] font-medium tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
+                className="inline-block font-mono text-[11px] tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
               >
                 Get Directions &rarr;
               </a>

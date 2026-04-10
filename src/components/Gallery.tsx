@@ -63,10 +63,10 @@ export default function Gallery() {
     <section id="space" data-bg="deep" className="pt-[100px] pb-0">
       {/* Header */}
       <div className="text-center px-6 md:px-12">
-        <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-5">
+        <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-5">
           The Space
         </p>
-        <h2 className="font-display font-light text-cream text-[clamp(28px,4vw,48px)] leading-[1.3]">
+        <h2 className="font-body font-light italic text-cream text-[clamp(28px,4vw,48px)] leading-[1.3]">
           An atmosphere you feel before you see
         </h2>
       </div>
@@ -97,15 +97,15 @@ export default function Gallery() {
             />
 
             {/* Bottom gradient for label readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-transparent" />
 
             {/* Number label */}
-            <span className="absolute top-5 right-6 font-body text-[11px] tracking-[2px] text-smoke">
+            <span className="absolute top-5 right-6 font-mono text-[11px] tracking-[2px] text-smoke">
               {String(i + 1).padStart(2, "0")} / {String(ITEMS.length).padStart(2, "0")}
             </span>
 
             {/* Descriptive label */}
-            <span className="absolute bottom-6 left-6 font-display italic text-[24px] text-cream">
+            <span className="absolute bottom-6 left-6 font-body font-light italic text-[24px] text-cream">
               {item.label}
             </span>
           </div>
@@ -113,7 +113,7 @@ export default function Gallery() {
       </div>
 
       {/* Scroll hint */}
-      <p className="text-center py-20 font-body text-[11px] tracking-[2px] uppercase text-smoke">
+      <p className="text-center py-20 font-mono text-[11px] tracking-[2px] uppercase text-smoke">
         Scroll to explore{" "}
         <span className="inline-block gallery-arrow-slide">&rarr;</span>
       </p>

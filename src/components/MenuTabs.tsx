@@ -8,7 +8,7 @@ const TABS = [
   { label: "Cantina", id: "cantina" },
 ] as const;
 
-const NAV_HEIGHT = 68;
+const NAV_HEIGHT = 60;
 
 export default function MenuTabs() {
   const [active, setActive] = useState("kitchen");
@@ -47,7 +47,7 @@ export default function MenuTabs() {
         <button
           key={tab.id}
           onClick={() => handleClick(tab.id)}
-          className={`font-body text-[12px] font-medium tracking-[3px] uppercase px-5 md:px-8 py-4 cursor-pointer transition-colors duration-300 border-b-2 ${
+          className={`font-mono text-[12px] tracking-[2.5px] uppercase px-5 md:px-8 py-4 cursor-pointer transition-colors duration-300 border-b-2 ${
             active === tab.id
               ? "text-cream border-terracotta"
               : "text-sand border-transparent hover:text-cream"

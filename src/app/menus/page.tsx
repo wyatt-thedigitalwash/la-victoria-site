@@ -49,7 +49,7 @@ const MENUS: MenuSection[] = [
         items: [
           { name: "Duck Carnitas", desc: "Slow-braised Moulard duck, salsa negra, handmade tortillas, pickled onion", price: 42 },
           { name: "Whole Grilled Branzino", desc: "Wood-fired, mole verde, charred lime, heirloom tomato salsa", price: 48 },
-          { name: "Short Rib Barbacoa", desc: "12-hour braised, black bean puree, pickled jalapeño, corn tortillas", price: 38 },
+          { name: "Short Rib Barbacoa", desc: "12-hour braised, black bean puree, pickled jalape\u00f1o, corn tortillas", price: 38 },
           { name: "Cochinita Pibil", desc: "Achiote-marinated heritage pork, habanero onion, handmade tortillas", price: 34 },
           { name: "Carne Asada", desc: "16oz prime ribeye, chimichurri, roasted chiles, grilled spring onion", price: 56 },
         ],
@@ -129,15 +129,15 @@ export default function MenusPage() {
       {/* Hero banner */}
       <section className="relative flex items-center justify-center min-h-[45vh] min-h-[max(45vh,320px)] overflow-hidden pt-[72px]">
         <div className="absolute inset-0 bg-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(139,58,47,0.1)_0%,_transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(74,107,90,0.07)_0%,_transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(184,151,106,0.05)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(77,24,7,0.1)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(124,101,51,0.07)_0%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(244,212,124,0.05)_0%,_transparent_70%)]" />
 
         <div className="relative z-10 text-center px-6">
-          <p className="font-body text-[11px] font-medium tracking-[4px] uppercase text-brass mb-5">
+          <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-5">
             Menus
           </p>
-          <h1 className="font-display italic font-light text-cream text-[clamp(32px,5vw,56px)] leading-[1.2]">
+          <h1 className="font-body font-light italic text-cream text-[clamp(32px,5vw,56px)] leading-[1.2]">
             Kitchen&ensp;&middot;&ensp;Crudo&ensp;&middot;&ensp;Cantina
           </h1>
         </div>
@@ -156,7 +156,7 @@ export default function MenusPage() {
         >
           <div className="mx-auto max-w-[900px]">
             {/* Section heading */}
-            <h2 className="font-display italic font-light text-[40px] text-cream text-center leading-tight">
+            <h2 className="font-body font-light italic text-[40px] text-cream text-center leading-tight">
               {menu.title}
             </h2>
             <div className="mx-auto mt-6 mb-6 w-10 h-px bg-brass" />
@@ -164,13 +164,13 @@ export default function MenusPage() {
             {/* Categories */}
             {menu.categories.map((cat) => (
               <div key={cat.category} className="mt-16">
-                <h3 className="font-display text-[24px] font-normal text-cream mb-4">
+                <h3 className="font-body text-[24px] font-medium text-cream mb-4">
                   {cat.category}
                 </h3>
                 <div className="h-px w-full bg-brass/8 mb-2" />
 
                 {cat.note && (
-                  <p className="font-display italic text-[15px] text-sand leading-[1.7] py-6">
+                  <p className="font-body font-light italic text-[15px] text-sand leading-[1.7] py-6">
                     {cat.note}
                   </p>
                 )}
@@ -179,12 +179,12 @@ export default function MenusPage() {
                   <ScrollReveal key={item.name} delay={i * 80}>
                     <div className="py-5 border-b border-brass/[0.06]">
                       <div className="flex items-baseline gap-3">
-                        <span className="font-display text-[20px] font-normal text-cream shrink-0">
+                        <span className="font-body text-[20px] text-cream shrink-0">
                           {item.name}
                         </span>
-                        <span className="flex-1 border-b border-dotted border-sand/15 translate-y-[-4px] min-w-[20px]" />
+                        <span className="flex-1 border-b border-dotted border-brass/15 translate-y-[-4px] min-w-[20px]" />
                         {item.price !== null && (
-                          <span className="font-display text-[18px] font-normal text-brass whitespace-nowrap shrink-0">
+                          <span className="font-body text-[18px] font-medium text-brass whitespace-nowrap shrink-0">
                             ${item.price}
                           </span>
                         )}

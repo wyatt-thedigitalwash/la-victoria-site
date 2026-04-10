@@ -3,17 +3,18 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Menus", href: "/menus" },
-  { label: "The Space", href: "/#space" },
-  { label: "Our Story", href: "/#story" },
+  { label: "The Space", href: "/the-space" },
   { label: "Private Events", href: "/private-events" },
   { label: "Visit", href: "/contact" },
 ];
 
 export default function Navigation() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -56,23 +57,34 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-[600ms] ${
+        className={`fixed top-0 left-0 w-full z-50 transition-[background-color,border-color] duration-[600ms] ${
           scrolled
-            ? "bg-deep/85 backdrop-blur-md border-b border-brass/10"
+            ? "bg-deep/85 border-b border-brass/10"
             : "bg-transparent border-b border-transparent"
         }`}
-        style={{ transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)" }}
+        style={{
+          transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+          transition: "background-color 600ms cubic-bezier(0.25,0.1,0.25,1), border-color 600ms cubic-bezier(0.25,0.1,0.25,1), backdrop-filter 600ms cubic-bezier(0.25,0.1,0.25,1), -webkit-backdrop-filter 600ms cubic-bezier(0.25,0.1,0.25,1)",
+        }}
       >
         <div className="mx-auto flex items-center justify-between px-6 py-4 max-w-[1400px] md:px-10">
           {/* Wordmark */}
           <Link
             href="/"
-            className={`font-display text-cream uppercase tracking-[0.25em] text-lg font-light transition-opacity duration-[600ms] ${
-              scrolled ? "opacity-100" : "opacity-0"
+            className={`transition-opacity duration-[600ms] ${
+              isHome && !scrolled ? "opacity-0" : "opacity-100"
             }`}
             style={{ transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)" }}
           >
-            La Victoria
+            <Image
+              src="/assets/La-Victoria-09.png"
+              alt="La Victoria"
+              width={140}
+              height={32}
+              className="h-[28px] w-auto"
+            />
           </Link>
 
           {/* Desktop links */}
