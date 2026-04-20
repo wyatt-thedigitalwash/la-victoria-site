@@ -3,9 +3,33 @@ import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "The Space | La Victoria",
+  title: "The Space",
   description:
     "Step inside La Victoria. Explore our cantina bar, crudo counter, dining room, and private dining spaces in downtown Tampa.",
+  alternates: { canonical: "/the-space" },
+  openGraph: {
+    title: "The Space | La Victoria — Tampa",
+    description:
+      "Step inside La Victoria. Explore our cantina bar, crudo counter, dining room, and private dining spaces in downtown Tampa.",
+    url: "/the-space",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Space | La Victoria — Tampa",
+    description:
+      "Step inside La Victoria. Explore our cantina bar, crudo counter, dining room, and private dining spaces in downtown Tampa.",
+    images: ["/og-image.png"],
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://lavictoriatampa.com" },
+    { "@type": "ListItem", position: 2, name: "The Space" },
+  ],
 };
 
 const SPACES = [
@@ -34,6 +58,10 @@ const SPACES = [
 export default function TheSpacePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Hero banner */}
       <section className="relative flex items-center justify-center min-h-[45vh] min-h-[max(45vh,320px)] overflow-hidden pt-[72px]">
         <div className="absolute inset-0 bg-deep" />
@@ -62,6 +90,7 @@ export default function TheSpacePage() {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
                   className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-transparent" />

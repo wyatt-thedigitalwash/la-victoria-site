@@ -93,6 +93,7 @@ export default function Gallery() {
               alt={item.alt}
               fill
               sizes="(max-width: 768px) 85vw, 70vw"
+              loading="lazy"
               className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
             />
 

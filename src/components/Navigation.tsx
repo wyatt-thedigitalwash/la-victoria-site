@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,6 +17,8 @@ export default function Navigation() {
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 100);
@@ -36,6 +38,49 @@ export default function Navigation() {
     }, 100);
     return () => clearTimeout(timer);
   }, [pathname]);
+
+  // Escape key closes mobile menu
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        hamburgerRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
+  // Focus trap in mobile menu
+  useEffect(() => {
+    if (!mobileOpen || !mobileMenuRef.current) return;
+    const menu = mobileMenuRef.current;
+    const focusable = menu.querySelectorAll<HTMLElement>(
+      'a[href], button, input, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    menu.addEventListener("keydown", onKeyDown);
+    return () => menu.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -57,6 +102,7 @@ export default function Navigation() {
   return (
     <>
       <nav
+        aria-label="Main navigation"
         className={`fixed top-0 left-0 w-full z-50 transition-[background-color,border-color] duration-[600ms] ${
           scrolled
             ? "bg-deep/85 border-b border-brass/10"
@@ -73,13 +119,14 @@ export default function Navigation() {
           {/* Wordmark */}
           <Link
             href="/"
+            aria-label="La Victoria — Home"
             className={`transition-opacity duration-[600ms] ${
               isHome && !scrolled ? "opacity-0" : "opacity-100"
             }`}
             style={{ transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)" }}
           >
             <Image
-              src="/assets/La-Victoria-09.png"
+              src="/assets/La-Victoria-09.webp"
               alt="La Victoria"
               width={140}
               height={32}
@@ -97,7 +144,7 @@ export default function Navigation() {
                   className="group relative font-body text-[11px] font-medium tracking-[2.5px] uppercase text-sand transition-colors duration-300 hover:text-cream"
                 >
                   {link.label}
-                  <span className="absolute left-0 -bottom-1 h-px w-full origin-left scale-x-0 bg-brass transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute left-0 -bottom-1 h-px w-full origin-left scale-x-0 bg-brass transition-transform duration-300 group-hover:scale-x-100" aria-hidden="true" />
                 </Link>
               </li>
             ))}
@@ -113,19 +160,24 @@ export default function Navigation() {
 
           {/* Mobile hamburger */}
           <button
+            ref={hamburgerRef}
             onClick={() => setMobileOpen(!mobileOpen)}
             className="flex md:hidden flex-col justify-center items-center gap-1.5 w-8 h-8"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             <span
               className={`block w-6 h-px bg-cream transition-transform duration-300 ${
                 mobileOpen ? "translate-y-[3.5px] rotate-45" : ""
               }`}
+              aria-hidden="true"
             />
             <span
               className={`block w-6 h-px bg-cream transition-transform duration-300 ${
                 mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""
               }`}
+              aria-hidden="true"
             />
           </button>
         </div>
@@ -133,6 +185,11 @@ export default function Navigation() {
 
       {/* Mobile overlay */}
       <div
+        ref={mobileMenuRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
         className={`fixed inset-0 z-40 bg-deep/98 backdrop-blur-sm flex flex-col items-center justify-center transition-opacity duration-500 md:hidden ${
           mobileOpen
             ? "opacity-100 pointer-events-auto"

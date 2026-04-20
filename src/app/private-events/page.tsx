@@ -2,9 +2,33 @@ import type { Metadata } from "next";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Private Events | La Victoria",
+  title: "Private Events",
   description:
-    "Host your next private event at La Victoria. Intimate dinners, celebrations, and corporate gatherings in downtown Tampa\u2019s newest upscale Mexican restaurant.",
+    "Host your next private event at La Victoria. Intimate dinners, celebrations, and corporate gatherings in downtown Tampa's newest upscale Mexican restaurant.",
+  alternates: { canonical: "/private-events" },
+  openGraph: {
+    title: "Private Events | La Victoria — Tampa",
+    description:
+      "Host your next private event at La Victoria. Intimate dinners, celebrations, and corporate gatherings in downtown Tampa.",
+    url: "/private-events",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Private Events | La Victoria — Tampa",
+    description:
+      "Host your next private event at La Victoria. Intimate dinners, celebrations, and corporate gatherings in downtown Tampa.",
+    images: ["/og-image.png"],
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://lavictoriatampa.com" },
+    { "@type": "ListItem", position: 2, name: "Private Events" },
+  ],
 };
 
 const DETAILS = [
@@ -23,6 +47,10 @@ const FIELDS = [
 export default function PrivateEventsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Hero banner */}
       <section className="relative flex items-center justify-center min-h-[45vh] min-h-[max(45vh,320px)] overflow-hidden pt-[72px]">
         <div className="absolute inset-0 bg-deep" />
@@ -90,6 +118,7 @@ export default function PrivateEventsPage() {
                       name={f.id}
                       type={f.type}
                       required={f.required}
+                      aria-required={f.required}
                       className="w-full bg-transparent border-b border-brass/20 text-cream font-body text-[14px] py-3 outline-none transition-colors duration-300 placeholder:text-smoke focus:border-brass"
                     />
                   </div>

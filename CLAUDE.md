@@ -15,8 +15,16 @@ src/lib/          -- utilities, constants, types
 public/           -- static assets (images, fonts, favicon)
 
 ## Design System
-- Colors: defined in SITE.md
-- Font: [primary font] + [secondary font if applicable]
+- Colors: defined in SITE.md, implemented as CSS custom properties in globals.css (e.g. --color-deep, --color-terracotta, --color-brass, --color-cream)
+- Primary Font: Montserrat (body/UI -- weights 300, 400, 500, 600, 700, CSS var --font-body)
+- Secondary Font: Space Mono (subtitles/labels/accents -- weights 400, 700, CSS var --font-mono)
+- Display Font: TBD -- Campground (script, titles) and Badhorse (display, accents). Custom files pending from client. Montserrat 300 italic as temporary stand-in
+- Typography hierarchy: Badhorse for accents/section labels, Campground for titles/headings, Space Mono for subtitles, Montserrat for body text
+- Section labels: Space Mono, 11px, weight 400, letter-spacing 4px, uppercase, golden wheat color
+- Navigation/UI text: Montserrat in small caps or tracked-out uppercase
+- Animation: slow, organic, unhurried. No bouncing or playful motion. Ease-out for entrances. Think candlelight
+- Aesthetic: dark, warm, layered -- warm brown/black backgrounds, never cool charcoal. Golden hour in the Sonoran desert, not candlelit speakeasy
+- Grain/noise texture overlay on backgrounds
 - All pages must be mobile responsive (breakpoint: 768px)
 - Use semantic HTML (nav, main, section, footer, article)
 - Every image needs alt text

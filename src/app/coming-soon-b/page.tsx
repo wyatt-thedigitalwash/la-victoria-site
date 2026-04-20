@@ -21,7 +21,7 @@ const EXPERIENCES = [
   },
 ] as const;
 
-export default function Home() {
+export default function ComingSoonB() {
   const [formOpen, setFormOpen] = useState(false);
   const revealRefs = useRef<HTMLElement[]>([]);
 
@@ -29,6 +29,15 @@ export default function Home() {
     if (el && !revealRefs.current.includes(el)) {
       revealRefs.current.push(el);
     }
+  }, []);
+
+  /* Hide the global Navigation on this route */
+  useEffect(() => {
+    const nav = document.querySelector("nav");
+    if (nav) nav.style.display = "none";
+    return () => {
+      if (nav) nav.style.display = "";
+    };
   }, []);
 
   /* Scroll-driven text reveal: opacity and translateY based on viewport center proximity */
@@ -138,12 +147,10 @@ export default function Home() {
                     borderRadius: "8px",
                   }}
                 >
-                  <label htmlFor="notify-name" className="sr-only">Name</label>
                   <input
-                    id="notify-name"
                     type="text"
                     placeholder="Name"
-                    aria-required="true"
+                    aria-label="Name"
                     className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
                     style={{
                       background: "#221C10",
@@ -152,12 +159,10 @@ export default function Home() {
                       padding: "14px 20px",
                     }}
                   />
-                  <label htmlFor="notify-email" className="sr-only">Email address</label>
                   <input
-                    id="notify-email"
                     type="email"
                     placeholder="Email"
-                    aria-required="true"
+                    aria-label="Email address"
                     className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
                     style={{
                       background: "#221C10",
@@ -166,11 +171,10 @@ export default function Home() {
                       padding: "14px 20px",
                     }}
                   />
-                  <label htmlFor="notify-phone" className="sr-only">Phone number (optional)</label>
                   <input
-                    id="notify-phone"
                     type="tel"
                     placeholder="Phone (optional)"
+                    aria-label="Phone number (optional)"
                     className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
                     style={{
                       background: "#221C10",
@@ -212,7 +216,7 @@ export default function Home() {
           >
             Discover
           </p>
-          <div className="csb-chevron-group flex flex-col items-center gap-1" aria-hidden="true">
+          <div className="csb-chevron-group flex flex-col items-center gap-1">
             <svg width="12" height="7" viewBox="0 0 12 7" fill="none" className="csb-chevron csb-chevron-1">
               <path d="M1 1L6 5.5L11 1" stroke="#F4D47C" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -299,7 +303,6 @@ export default function Home() {
           alt="La Victoria icon"
           width={40}
           height={40}
-          loading="lazy"
           className="mb-6"
         />
 
@@ -310,7 +313,7 @@ export default function Home() {
           rel="noopener noreferrer"
           className="font-mono text-[11px] tracking-[2px] uppercase transition-opacity duration-300 hover:opacity-70"
           style={{ color: "#F4D47C" }}
-          aria-label="Follow La Victoria on Instagram (opens in new tab)"
+          aria-label="Follow La Victoria on Instagram"
         >
           Instagram
         </a>
@@ -353,7 +356,7 @@ export default function Home() {
             className="transition-colors duration-300 hover:text-[rgba(252,233,199,0.6)]"
             style={{ color: "inherit" }}
           >
-            The Digital Wash<span className="sr-only"> (opens in new tab)</span>
+            The Digital Wash
           </a>
         </p>
       </footer>

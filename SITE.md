@@ -28,9 +28,10 @@
 
 ## Pages
 - [x] Home (single-page scrolling experience with anchored sections)
-- [ ] Menus (Kitchen, Crudo, Cantina -- tabbed or sectioned)
-- [ ] Private Events (inquiry form + capacity info)
-- [ ] Contact/Visit (location, hours, map)
+- [x] Menus (Kitchen, Crudo, Cantina -- tabbed)
+- [x] Private Events (inquiry form + capacity info)
+- [x] The Space (gallery/atmosphere)
+- [x] Contact (location, hours, map)
 
 ## Content Status
 - [ ] Copy provided by client

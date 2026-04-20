@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://DOMAIN.com/sitemap.xml',
+    sitemap: 'https://lavictoriatampa.com/sitemap.xml',
   };
 }

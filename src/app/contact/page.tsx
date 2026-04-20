@@ -2,9 +2,24 @@ import type { Metadata } from "next";
 import MapPlaceholder from "@/components/MapPlaceholder";
 
 export const metadata: Metadata = {
-  title: "Visit | La Victoria",
+  title: "Visit",
   description:
-    "Find La Victoria at 105 W Tyler Street in downtown Tampa. Hours, directions, and contact information.",
+    "Find La Victoria at 105 W Tyler Street in downtown Tampa. View hours, get directions, and contact us for reservations.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Visit | La Victoria — Tampa",
+    description:
+      "Find La Victoria at 105 W Tyler Street in downtown Tampa. View hours, get directions, and contact us for reservations.",
+    url: "/contact",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Visit | La Victoria — Tampa",
+    description:
+      "Find La Victoria at 105 W Tyler Street in downtown Tampa. View hours, get directions, and contact us for reservations.",
+    images: ["/og-image.png"],
+  },
 };
 
 const HOURS = [
@@ -17,9 +32,22 @@ const HOURS = [
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=105+W+Tyler+Street+Tampa+FL+33602";
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://lavictoriatampa.com" },
+    { "@type": "ListItem", position: 2, name: "Visit" },
+  ],
+};
+
 export default function ContactPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Hero banner */}
       <section className="relative flex items-center justify-center min-h-[40vh] min-h-[max(40vh,280px)] overflow-hidden pt-[72px]">
         <div className="absolute inset-0 bg-deep" />

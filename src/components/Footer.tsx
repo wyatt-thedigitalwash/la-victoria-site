@@ -15,15 +15,16 @@ export default function Footer() {
       <div className="mx-auto max-w-[1200px] flex flex-col items-center">
         {/* Logo */}
         <Image
-          src="/assets/La-Victoria-icon-beige.png"
+          src="/assets/La-Victoria-icon-beige.webp"
           alt="La Victoria"
           width={68}
           height={68}
+          loading="lazy"
           className="w-[68px] h-auto mb-10"
         />
 
         {/* Nav links */}
-        <nav className="flex flex-wrap justify-center gap-6 md:gap-9 mb-8">
+        <nav aria-label="Footer navigation" className="flex flex-wrap justify-center gap-6 md:gap-9 mb-8">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.label}
@@ -56,19 +57,22 @@ export default function Footer() {
           <p className="font-body text-[12px] text-smoke mb-4">
             Stay informed on openings, events, and seasonal menus
           </p>
-          <div className="flex flex-col md:flex-row">
+          <form className="flex flex-col md:flex-row" onSubmit={(e) => e.preventDefault()}>
+            <label htmlFor="footer-email" className="sr-only">Email address</label>
             <input
+              id="footer-email"
               type="email"
               placeholder="your@email.com"
+              aria-required="true"
               className="flex-1 bg-surface border border-brass/15 md:border-r-0 text-cream font-body text-[13px] px-5 py-3.5 placeholder:text-smoke outline-none transition-colors duration-300 focus:border-brass/40"
             />
             <button
-              type="button"
+              type="submit"
               className="bg-terracotta border border-terracotta text-cream font-body text-[11px] font-medium tracking-[2px] uppercase px-6 py-3.5 transition-colors duration-300 hover:bg-[#9B4A3F] hover:border-[#9B4A3F]"
             >
               Subscribe
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Bottom bar */}
@@ -84,7 +88,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-brass/60 transition-colors duration-300 hover:text-brass"
             >
-              The Digital Wash
+              The Digital Wash<span className="sr-only"> (opens in new tab)</span>
             </a>
           </span>
         </div>

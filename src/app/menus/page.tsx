@@ -3,9 +3,33 @@ import ScrollReveal from "@/components/ScrollReveal";
 import MenuTabs from "@/components/MenuTabs";
 
 export const metadata: Metadata = {
-  title: "Menus | La Victoria",
+  title: "Menus",
   description:
-    "Explore the Kitchen, Crudo, and Cantina menus at La Victoria — an upscale Mexican dining experience in downtown Tampa.",
+    "Explore the Kitchen, Crudo, and Cantina menus at La Victoria — upscale Mexican dining featuring wood-fired dishes, fresh crudo, and artisanal cocktails in Tampa.",
+  alternates: { canonical: "/menus" },
+  openGraph: {
+    title: "Menus | La Victoria — Tampa",
+    description:
+      "Explore the Kitchen, Crudo, and Cantina menus at La Victoria — upscale Mexican dining featuring wood-fired dishes, fresh crudo, and artisanal cocktails.",
+    url: "/menus",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Menus | La Victoria — Tampa",
+    description:
+      "Explore the Kitchen, Crudo, and Cantina menus — wood-fired dishes, fresh crudo, and artisanal cocktails in downtown Tampa.",
+    images: ["/og-image.png"],
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://lavictoriatampa.com" },
+    { "@type": "ListItem", position: 2, name: "Menus" },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -126,6 +150,10 @@ const MENUS: MenuSection[] = [
 export default function MenusPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Hero banner */}
       <section className="relative flex items-center justify-center min-h-[45vh] min-h-[max(45vh,320px)] overflow-hidden pt-[72px]">
         <div className="absolute inset-0 bg-deep" />
