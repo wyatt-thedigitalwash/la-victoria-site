@@ -45,7 +45,7 @@ export async function POST(request: Request) {
           <!-- Logo -->
           <tr>
             <td align="center" style="padding-bottom:24px;">
-              <img src="https://la-victoria-site.vercel.app/assets/La-Victoria-title-only.svg" alt="La Victoria" width="240" style="display:block;width:240px;height:auto;" />
+              <img src="https://lavictoriatampa.com/assets/La-Victoria-title-only.svg" alt="La Victoria" width="240" style="display:block;width:240px;height:auto;" />
             </td>
           </tr>
           <!-- Subtitle -->
