@@ -23,6 +23,12 @@ const EXPERIENCES = [
 
 export default function ComingSoonB() {
   const [formOpen, setFormOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const revealRefs = useRef<HTMLElement[]>([]);
 
   const addRevealRef = useCallback((el: HTMLElement | null) => {
@@ -114,14 +120,21 @@ export default function ComingSoonB() {
 
           {/* Get Notified button / expandable form */}
           <div className="csb-notify mt-10">
-            {!formOpen ? (
+            {submitted ? (
+              <p
+                className="font-mono text-[12px] tracking-[3px] uppercase"
+                style={{ color: "#F4D47C" }}
+              >
+                You&apos;re on the list
+              </p>
+            ) : !formOpen ? (
               <>
                 {/* Coming soon text */}
                 <p
                   className="font-mono text-[12px] tracking-[3px] uppercase mb-6"
                   style={{ color: "#FCE8C7" }}
                 >
-                  Coming Summer 2026
+                  Coming Fall 2026
                 </p>
 
                 <button
@@ -137,7 +150,29 @@ export default function ComingSoonB() {
             ) : (
               <form
                 className="csb-notify-form flex flex-col items-center w-full max-w-[380px]"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (!firstName.trim() || !lastName.trim() || !email.trim()) return;
+                  setSubmitting(true);
+                  try {
+                    const res = await fetch("/api/leads", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        first_name: firstName.trim(),
+                        last_name: lastName.trim(),
+                        email: email.trim(),
+                        phone: phone.trim() || null,
+                      }),
+                    });
+                    if (res.ok) {
+                      setFormOpen(false);
+                      setSubmitted(true);
+                    }
+                  } finally {
+                    setSubmitting(false);
+                  }
+                }}
               >
                 <div
                   className="w-full flex flex-col gap-3 rounded-lg backdrop-blur-md"
@@ -147,10 +182,14 @@ export default function ComingSoonB() {
                     borderRadius: "8px",
                   }}
                 >
+                  <label htmlFor="csb-notify-first-name" className="sr-only">First name</label>
                   <input
+                    id="csb-notify-first-name"
                     type="text"
-                    placeholder="Name"
-                    aria-label="Name"
+                    placeholder="First Name"
+                    required
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
                     style={{
                       background: "#221C10",
@@ -159,10 +198,30 @@ export default function ComingSoonB() {
                       padding: "14px 20px",
                     }}
                   />
+                  <label htmlFor="csb-notify-last-name" className="sr-only">Last name</label>
                   <input
+                    id="csb-notify-last-name"
+                    type="text"
+                    placeholder="Last Name"
+                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
+                    style={{
+                      background: "#221C10",
+                      border: "1px solid rgba(124, 101, 51, 0.3)",
+                      color: "#FCE9C7",
+                      padding: "14px 20px",
+                    }}
+                  />
+                  <label htmlFor="csb-notify-email" className="sr-only">Email address</label>
+                  <input
+                    id="csb-notify-email"
                     type="email"
                     placeholder="Email"
-                    aria-label="Email address"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
                     style={{
                       background: "#221C10",
@@ -171,10 +230,13 @@ export default function ComingSoonB() {
                       padding: "14px 20px",
                     }}
                   />
+                  <label htmlFor="csb-notify-phone" className="sr-only">Phone number (optional)</label>
                   <input
+                    id="csb-notify-phone"
                     type="tel"
                     placeholder="Phone (optional)"
-                    aria-label="Phone number (optional)"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
                     style={{
                       background: "#221C10",
@@ -185,14 +247,15 @@ export default function ComingSoonB() {
                   />
                   <button
                     type="submit"
-                    className="w-full font-mono text-[11px] tracking-[2px] uppercase transition-colors duration-300 hover:bg-[#5e1e0a] cursor-pointer"
+                    disabled={submitting}
+                    className="w-full font-mono text-[11px] tracking-[2px] uppercase transition-colors duration-300 hover:bg-[#5e1e0a] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{
                       background: "#4D1807",
                       color: "#FCE9C7",
                       padding: "14px 20px",
                     }}
                   >
-                    Submit
+                    {submitting ? "Submitting..." : "Submit"}
                   </button>
                 </div>
                 <button
