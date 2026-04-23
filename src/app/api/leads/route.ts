@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       await resend.emails.send({
         from: "La Victoria <noreply@lavictoriatampa.com>",
         to: email,
-        subject: "You're In",
+        subject: "You're on the list!",
         html: `
 <!DOCTYPE html>
 <html lang="en">
