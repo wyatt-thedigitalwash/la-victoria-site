@@ -145,26 +145,18 @@ export default function CareersPage() {
             </div>
 
             <div className="relative z-10 flex flex-col items-center text-center px-6">
-              <Image
-                src="/assets/La-Victoria-09.webp"
-                alt="La Victoria logo"
-                width={180}
-                height={180}
-                priority
-                className="careers-logo w-[180px] h-auto"
-              />
               <p
-                className="font-mono text-[12px] tracking-[6px] uppercase mt-5"
+                className="font-mono text-[11px] tracking-[4px] uppercase mb-5"
                 style={{ color: "#F4D47C" }}
-              >
-                Kitchen&ensp;&middot;&ensp;Crudo&ensp;&middot;&ensp;Cantina
-              </p>
-              <p
-                className="font-body text-[48px] font-light italic mt-4"
-                style={{ color: "#FCE9C7" }}
               >
                 Careers
               </p>
+              <h1
+                className="font-body text-[clamp(32px,5vw,48px)] font-light italic leading-[1.3]"
+                style={{ color: "#FCE9C7" }}
+              >
+                Grow With Us
+              </h1>
             </div>
           </section>
         </div>
@@ -185,7 +177,7 @@ export default function CareersPage() {
               <ul className="mt-6 space-y-3 pl-0">
                 {[
                   "Live their lives in a constant spirit of hospitality, because true hospitality begins from within",
-                  "Believe every guest deserves their best and appreciate the value of selfless service",
+                  "Believe every guest deserves our best and appreciate the value of selfless service",
                   "Understand discipline is the first rung on the ladder of success, and that the second rung is standards",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 font-body text-[16px] font-normal leading-[1.8]" style={{ color: "#2A2418" }}>
@@ -202,7 +194,7 @@ export default function CareersPage() {
           </section>
 
           {/* ── Two Column Section ── */}
-          <section ref={addRevealRef} className="careers-reveal px-6 py-15">
+          <section ref={addRevealRef} className="careers-reveal px-6 pt-4 pb-10">
             <div className="mx-auto max-w-[900px] grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Left: Thrive here */}
               <div>
@@ -396,23 +388,6 @@ export default function CareersPage() {
         </footer>
 
         <style jsx>{`
-          /* ── Hero entrance animations ── */
-          .careers-logo {
-            opacity: 0;
-            animation: careers-fade-up 1.5s cubic-bezier(0, 0, 0.25, 1) forwards;
-          }
-
-          @keyframes careers-fade-up {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
           /* ── ScrollReveal ── */
           .careers-reveal {
             opacity: 0;

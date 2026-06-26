@@ -82,7 +82,7 @@ export default function ComingSoonNav() {
     return () => menu.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
-  const hideLogo = (isHome || isCareers) && !scrolled;
+  const hideLogo = isHome && !scrolled;
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   return (
