@@ -22,6 +22,7 @@ const EXPERIENCES = [
 ] as const;
 
 export default function Home() {
+  const [heroHeight, setHeroHeight] = useState<string>("100dvh");
   const [formOpen, setFormOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -36,6 +37,11 @@ export default function Home() {
     if (el && !revealRefs.current.includes(el)) {
       revealRefs.current.push(el);
     }
+  }, []);
+
+  /* Lock hero height on mount so mobile browser chrome changes don't cause reflow */
+  useEffect(() => {
+    setHeroHeight(`${window.innerHeight}px`);
   }, []);
 
   /* Scroll-driven text reveal: opacity and translateY based on viewport center proximity */
@@ -70,7 +76,7 @@ export default function Home() {
   return (
     <main id="main-content" style={{ background: "#221A0E" }}>
       {/* ── Hero ── */}
-      <section className="csb-hero relative flex min-h-screen items-center justify-center overflow-hidden" style={{ paddingTop: "calc(var(--banner-height, 0px) + 56px)" }}>
+      <section className="csb-hero relative flex items-center justify-center overflow-hidden" style={{ minHeight: heroHeight, paddingTop: "calc(var(--banner-height, 0px) + 56px)" }}>
         {/* Background image */}
         <Image
           src="/assets/cactus-video.png"

@@ -17,6 +17,7 @@ const NAV_LINKS = [
 export default function ComingSoonNav() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isCareers = pathname === "/careers";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -24,11 +25,19 @@ export default function ComingSoonNav() {
 
   // Show background after scrolling past the hero
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.85);
+    const getThreshold = () => {
+      if (isHome) return window.innerHeight * 0.85;
+      // Find the first section/hero and use its bottom edge
+      const hero = document.querySelector("section");
+      if (hero) return hero.offsetTop + hero.offsetHeight - 60;
+      return 100;
+    };
+
+    const onScroll = () => setScrolled(window.scrollY > getThreshold());
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   // Escape key closes mobile menu
   useEffect(() => {
@@ -73,6 +82,7 @@ export default function ComingSoonNav() {
     return () => menu.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
+  const hideLogo = (isHome || isCareers) && !scrolled;
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   return (
@@ -94,8 +104,8 @@ export default function ComingSoonNav() {
             aria-label="La Victoria — Home"
             className="transition-opacity duration-500"
             style={{
-              opacity: isHome && !scrolled ? 0 : 1,
-              pointerEvents: isHome && !scrolled ? "none" : "auto",
+              opacity: hideLogo ? 0 : 1,
+              pointerEvents: hideLogo ? "none" : "auto",
             }}
           >
             <Image
@@ -174,6 +184,18 @@ export default function ComingSoonNav() {
         style={{ background: "rgba(16, 14, 4, 0.98)", backdropFilter: "blur(4px)" }}
       >
         <ul className="flex flex-col items-center gap-8">
+          <li>
+            <Link
+              href="/"
+              onClick={closeMobile}
+              className="font-body text-[13px] font-medium tracking-[3px] uppercase transition-colors duration-300"
+              style={{ color: "#C4A882" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#FCE9C7")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#C4A882")}
+            >
+              Home
+            </Link>
+          </li>
           {NAV_LINKS.map((link) => (
             <li key={link.label}>
               <Link
