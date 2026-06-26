@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Menus",
+  title: "Private Dining",
   description:
-    "Our Chef is putting the finishing touches on a menu that celebrates bold flavors, fresh ingredients, and thoughtful execution at La Victoria in Tampa.",
-  alternates: { canonical: "/menus" },
+    "From intimate dinners to special occasions, La Victoria is creating a space worth gathering in. Private dining details coming soon.",
+  alternates: { canonical: "/private-dining" },
 };
 
-export default function MenusPage() {
+export default function PrivateDiningPage() {
   return (
     <main id="main-content" style={{ background: "#221A0E" }}>
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
@@ -22,19 +22,19 @@ export default function MenusPage() {
             className="font-mono text-[11px] tracking-[4px] uppercase mb-5"
             style={{ color: "#F4D47C" }}
           >
-            Menus
+            Private Dining
           </p>
           <h1
             className="font-body text-[clamp(32px,5vw,48px)] font-light italic leading-[1.3] mb-6"
             style={{ color: "#FCE9C7" }}
           >
-            Coming Soon
+            Celebrate With Us
           </h1>
           <p
             className="font-body text-[16px] font-normal leading-[1.8]"
             style={{ color: "rgba(252, 233, 199, 0.7)" }}
           >
-            Our Chef is putting the finishing touches on a menu that celebrates bold flavors, fresh ingredients, and thoughtful execution. We can&apos;t wait to share it with you.
+            From intimate dinners to special occasions, we&apos;re creating a space worth gathering in. Private dining details are coming soon.
           </p>
         </div>
       </section>

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Menus",
+  title: "Photos",
   description:
-    "Our Chef is putting the finishing touches on a menu that celebrates bold flavors, fresh ingredients, and thoughtful execution at La Victoria in Tampa.",
-  alternates: { canonical: "/menus" },
+    "Our restaurant is coming to life every day. Check @lavictoriatampa on Instagram for a first look inside La Victoria.",
+  alternates: { canonical: "/photos" },
 };
 
-export default function MenusPage() {
+export default function PhotosPage() {
   return (
     <main id="main-content" style={{ background: "#221A0E" }}>
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
@@ -22,19 +22,29 @@ export default function MenusPage() {
             className="font-mono text-[11px] tracking-[4px] uppercase mb-5"
             style={{ color: "#F4D47C" }}
           >
-            Menus
+            Photos
           </p>
           <h1
             className="font-body text-[clamp(32px,5vw,48px)] font-light italic leading-[1.3] mb-6"
             style={{ color: "#FCE9C7" }}
           >
-            Coming Soon
+            The Best Moments Are Still To Come
           </h1>
           <p
             className="font-body text-[16px] font-normal leading-[1.8]"
             style={{ color: "rgba(252, 233, 199, 0.7)" }}
           >
-            Our Chef is putting the finishing touches on a menu that celebrates bold flavors, fresh ingredients, and thoughtful execution. We can&apos;t wait to share it with you.
+            Our restaurant is coming to life every day. Check{" "}
+            <a
+              href="https://www.instagram.com/lavictoriatampa/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-300 hover:text-cream"
+              style={{ color: "#F4D47C" }}
+            >
+              @lavictoriatampa
+            </a>{" "}
+            on Instagram for a first look inside La Victoria.
           </p>
         </div>
       </section>

@@ -38,6 +38,7 @@
 :root {
   --background: #100E04;
   --foreground: #FCE9C7;
+  --banner-height: 56px;
 }
 
 body {

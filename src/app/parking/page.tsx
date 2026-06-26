@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Menus",
+  title: "Parking",
   description:
-    "Our Chef is putting the finishing touches on a menu that celebrates bold flavors, fresh ingredients, and thoughtful execution at La Victoria in Tampa.",
-  alternates: { canonical: "/menus" },
+    "Parking information for La Victoria in downtown Tampa. Details on nearby lots and valet will be available before opening day.",
+  alternates: { canonical: "/parking" },
 };
 
-export default function MenusPage() {
+export default function ParkingPage() {
   return (
     <main id="main-content" style={{ background: "#221A0E" }}>
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
@@ -22,19 +22,19 @@ export default function MenusPage() {
             className="font-mono text-[11px] tracking-[4px] uppercase mb-5"
             style={{ color: "#F4D47C" }}
           >
-            Menus
+            Parking
           </p>
           <h1
             className="font-body text-[clamp(32px,5vw,48px)] font-light italic leading-[1.3] mb-6"
             style={{ color: "#FCE9C7" }}
           >
-            Coming Soon
+            Planning Your Visit
           </h1>
           <p
             className="font-body text-[16px] font-normal leading-[1.8]"
             style={{ color: "rgba(252, 233, 199, 0.7)" }}
           >
-            Our Chef is putting the finishing touches on a menu that celebrates bold flavors, fresh ingredients, and thoughtful execution. We can&apos;t wait to share it with you.
+            We&apos;re finalizing the details to make your arrival as smooth as possible. Parking information will be available before opening day.
           </p>
         </div>
       </section>

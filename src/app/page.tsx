@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <main id="main-content" style={{ background: "#221A0E" }}>
       {/* ── Hero ── */}
-      <section className="csb-hero relative flex min-h-screen items-center justify-center overflow-hidden">
+      <section className="csb-hero relative flex min-h-screen items-center justify-center overflow-hidden" style={{ paddingTop: "calc(var(--banner-height, 0px) + 56px)" }}>
         {/* Background image */}
         <Image
           src="/assets/cactus-video.png"

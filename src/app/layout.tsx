@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Space_Mono } from "next/font/google";
-// Navigation hidden during coming-soon phase — uncomment when full site launches
-// import Navigation from "@/components/Navigation";
+import NowHiringBanner from "@/components/NowHiringBanner";
+import ComingSoonNav from "@/components/ComingSoonNav";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -106,8 +106,8 @@ export default function RootLayout({
               }),
             }}
           />
-          {/* Navigation hidden during coming-soon phase — uncomment when full site launches */}
-          {/* <Navigation /> */}
+          <NowHiringBanner />
+          <ComingSoonNav />
           {children}
         </body>
     </html>
