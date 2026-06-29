@@ -246,12 +246,17 @@ export default function CareersPage() {
                     href={job.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-body text-[20px] font-medium transition-colors duration-300"
+                    className="group/title relative inline-block font-body text-[20px] font-medium transition-colors duration-300"
                     style={{ color: "#4D1807" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "#6B2410")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "#4D1807")}
                   >
                     {job.title}
+                    <span
+                      className="absolute left-0 bottom-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 group-hover/title:scale-x-100"
+                      style={{ background: "#4D1807" }}
+                      aria-hidden="true"
+                    />
                   </a>
 
                   <div className="mt-3 flex flex-col gap-1.5">
