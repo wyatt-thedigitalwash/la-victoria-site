@@ -283,10 +283,15 @@ export default function CareersPage() {
                     href={job.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block font-mono text-[11px] tracking-[2px] uppercase mt-5 transition-colors duration-300 hover:text-[#6B2410]"
+                    className="group relative inline-block font-mono text-[11px] tracking-[2px] uppercase mt-5 transition-colors duration-300 hover:text-[#6B2410]"
                     style={{ color: "#4D1807" }}
                   >
                     Apply on Indeed &rarr;
+                    <span
+                      className="absolute left-0 -bottom-1 h-px w-full origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+                      style={{ background: "#4D1807" }}
+                      aria-hidden="true"
+                    />
                   </a>
                 </article>
               ))}
