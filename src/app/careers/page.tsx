@@ -6,6 +6,7 @@ import Image from "next/image";
 const JOB_LISTINGS = [
   {
     title: "Server",
+    href: "https://www.indeed.com/job/server-bb7f848b3437ea85",
     department: "Front of House / Dining Room",
     reportsTo: "Supervisor / Assistant General Manager",
     type: "Full-Time / Part-Time",
@@ -15,6 +16,7 @@ const JOB_LISTINGS = [
   },
   {
     title: "Line Cook",
+    href: "https://www.indeed.com/job/line-cook-599c99ef2b633ee6",
     department: "Back of House / Kitchen",
     reportsTo: "Supervisor / Sous Chef",
     type: "Full-Time / Part-Time",
@@ -24,6 +26,7 @@ const JOB_LISTINGS = [
   },
   {
     title: "Bartender",
+    href: "https://www.indeed.com/job/bartender-ee5eecdb0489c30d",
     department: "Front of House / Bar",
     reportsTo: "Supervisor / Assistant General Manager",
     type: "Full-Time / Part-Time",
@@ -33,6 +36,7 @@ const JOB_LISTINGS = [
   },
   {
     title: "Prep Cook",
+    href: "https://www.indeed.com/job/prep-cook-5a8d0d433fffc602",
     department: "Back of House / Kitchen",
     reportsTo: "Supervisor / Sous Chef",
     type: "Full-Time / Part-Time",
@@ -42,6 +46,7 @@ const JOB_LISTINGS = [
   },
   {
     title: "Guest Services",
+    href: "https://www.indeed.com/job/hosthostess-dac262ccd469b83f",
     department: "Front of House / Dining Room",
     reportsTo: "Supervisor / Assistant General Manager",
     type: "Full-Time / Part-Time",
@@ -51,6 +56,7 @@ const JOB_LISTINGS = [
   },
   {
     title: "Server Assistant",
+    href: "https://www.indeed.com/job/server-assistant-8198e2ad1f6dd363",
     department: "Front of House / Bar and Dining Room",
     reportsTo: "Supervisor / Assistant General Manager",
     type: "Full-Time / Part-Time",
@@ -60,6 +66,7 @@ const JOB_LISTINGS = [
   },
   {
     title: "General Utility",
+    href: "https://www.indeed.com/job/general-utility-worker-ac3e779a33d5d0c3",
     department: "Back of House / Kitchen",
     reportsTo: "Supervisor / Sous Chef",
     type: "Full-Time / Part-Time",
@@ -69,6 +76,7 @@ const JOB_LISTINGS = [
   },
   {
     title: "Barista",
+    href: "https://www.indeed.com/job/barista-3ce3caed13c7096c",
     department: "Front of House / Bar",
     reportsTo: "Supervisor / Assistant General Manager",
     type: "Full-Time / Part-Time",
@@ -235,7 +243,9 @@ export default function CareersPage() {
                   }}
                 >
                   <a
-                    href="#"
+                    href={job.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="font-body text-[20px] font-medium transition-colors duration-300"
                     style={{ color: "#4D1807" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "#6B2410")}
@@ -268,6 +278,16 @@ export default function CareersPage() {
                   >
                     {job.description}
                   </p>
+
+                  <a
+                    href={job.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block font-mono text-[11px] tracking-[2px] uppercase mt-5 transition-colors duration-300 hover:text-[#6B2410]"
+                    style={{ color: "#4D1807" }}
+                  >
+                    Apply on Indeed &rarr;
+                  </a>
                 </article>
               ))}
             </div>
@@ -354,11 +374,11 @@ export default function CareersPage() {
 
           {/* Email */}
           <a
-            href="mailto:info@lavictoriatampa.com"
+            href="mailto:operations@lavictoriatampa.com"
             className="font-body text-[13px] font-normal mt-1 transition-opacity duration-300 hover:opacity-80"
             style={{ color: "rgba(252, 233, 199, 0.6)" }}
           >
-            info@lavictoriatampa.com
+            operations@lavictoriatampa.com
           </a>
 
           {/* Copyright */}

@@ -79,7 +79,7 @@ export default function RootLayout({
                   "Upscale Mexican dining in downtown Tampa featuring three experiences: Kitchen, Crudo, and Cantina.",
                 url: "https://lavictoriatampa.com",
                 telephone: "(813) 555-0100",
-                email: "info@lavictoriatampa.com",
+                email: "operations@lavictoriatampa.com",
                 servesCuisine: "Mexican",
                 priceRange: "$$$",
                 address: {

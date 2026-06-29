@@ -401,11 +401,11 @@ export default function Home() {
 
         {/* Email */}
         <a
-          href="mailto:info@lavictoriatampa.com"
+          href="mailto:operations@lavictoriatampa.com"
           className="font-body text-[13px] font-normal mt-1 transition-opacity duration-300 hover:opacity-80"
           style={{ color: "rgba(252, 233, 199, 0.6)" }}
         >
-          info@lavictoriatampa.com
+          operations@lavictoriatampa.com
         </a>
 
         {/* Copyright */}
