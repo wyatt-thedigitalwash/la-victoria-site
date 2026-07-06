@@ -8,6 +8,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname === "/" ||
     pathname === "/careers" ||
+    pathname === "/apply" ||
     pathname === "/menus" ||
     pathname === "/photos" ||
     pathname === "/parking" ||
