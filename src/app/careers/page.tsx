@@ -838,20 +838,37 @@ export default function CareersPage() {
     const elements = revealRefs.current;
     if (!elements.length) return;
 
+    const reveal = (el: Element) => el.classList.add("careers-visible");
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("careers-visible");
+            reveal(entry.target);
             observer.unobserve(entry.target);
           }
         }
       },
-      { threshold: 0.15 }
+      // threshold 0 so tall sections reveal as soon as any edge enters the
+      // viewport. threshold 0.15 could never be met when a section is taller
+      // than ~6.6x the viewport (common for the job list on small phones),
+      // leaving the cards stuck at opacity 0.
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
     );
 
     for (const el of elements) observer.observe(el);
-    return () => observer.disconnect();
+
+    // Safety net: if the observer never fires (JS quirks, unsupported
+    // browsers), reveal everything after a short delay so content can never
+    // get permanently stuck hidden.
+    const fallback = setTimeout(() => {
+      for (const el of elements) reveal(el);
+    }, 3000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
   }, []);
 
   return (
