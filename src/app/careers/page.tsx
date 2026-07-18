@@ -1103,7 +1103,7 @@ export default function CareersPage() {
               {TIMELINE.map((item, i) => (
                 <div
                   key={item.label}
-                  className="flex items-center justify-between py-3"
+                  className="flex items-start justify-between gap-6 py-3"
                   style={{
                     borderBottom:
                       i < TIMELINE.length - 1
@@ -1111,10 +1111,10 @@ export default function CareersPage() {
                         : "none",
                   }}
                 >
-                  <span className="font-body text-[15px] font-normal" style={{ color: "#7C6533" }}>
+                  <span className="min-w-0 flex-[2] font-body text-[15px] font-normal" style={{ color: "#7C6533" }}>
                     {item.label}
                   </span>
-                  <span className="font-body text-[15px] font-medium" style={{ color: "#1E1A12" }}>
+                  <span className="min-w-0 flex-[3] text-right font-body text-[15px] font-medium" style={{ color: "#1E1A12" }}>
                     {item.date}
                   </span>
                 </div>
