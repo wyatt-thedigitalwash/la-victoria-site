@@ -5,6 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      // Private client walkthrough — password gated, never for public indexing.
+      disallow: ['/preview', '/preview/'],
     },
     sitemap: 'https://lavictoriatampa.com/sitemap.xml',
   };

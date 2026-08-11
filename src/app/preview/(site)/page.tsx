@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import Philosophy from "@/components/Philosophy";
@@ -5,7 +6,10 @@ import Gallery from "@/components/Gallery";
 import MenuPreview from "@/components/MenuPreview";
 import ReservationCta from "@/components/ReservationCta";
 import Location from "@/components/Location";
-import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Home",
+};
 
 const PANELS = [
   {
@@ -154,9 +158,6 @@ export default function Home() {
 
       {/* -- Location -- */}
       <Location />
-
-      {/* -- Footer -- */}
-      <Footer />
     </main>
   );
 }

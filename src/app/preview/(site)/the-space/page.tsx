@@ -6,21 +6,6 @@ export const metadata: Metadata = {
   title: "The Space",
   description:
     "Step inside La Victoria. Explore our cantina bar, crudo counter, dining room, and private dining spaces in downtown Tampa.",
-  alternates: { canonical: "/the-space" },
-  openGraph: {
-    title: "The Space | La Victoria — Tampa",
-    description:
-      "Step inside La Victoria. Explore our cantina bar, crudo counter, dining room, and private dining spaces in downtown Tampa.",
-    url: "/the-space",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "The Space | La Victoria — Tampa",
-    description:
-      "Step inside La Victoria. Explore our cantina bar, crudo counter, dining room, and private dining spaces in downtown Tampa.",
-    images: ["/og-image.png"],
-  },
 };
 
 const breadcrumbSchema = {

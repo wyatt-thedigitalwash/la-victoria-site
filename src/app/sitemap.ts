@@ -3,6 +3,9 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://lavictoriatampa.com';
 
+  // Only routes the public site actually serves. The full-site pages
+  // (the-space, private-events, contact) live in the private /preview
+  // walkthrough until launch, so they are deliberately absent.
   return [
     {
       url: baseUrl,
@@ -17,22 +20,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/the-space`,
+      url: `${baseUrl}/photos`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/careers`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/private-dining`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/private-events`,
+      url: `${baseUrl}/parking`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
-      priority: 0.8,
+      priority: 0.5,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}/reservations`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
-      priority: 0.8,
+      priority: 0.7,
     },
   ];
 }

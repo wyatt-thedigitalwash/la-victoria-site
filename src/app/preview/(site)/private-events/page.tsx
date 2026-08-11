@@ -5,21 +5,6 @@ export const metadata: Metadata = {
   title: "Private Events",
   description:
     "Host your next private event at La Victoria. Intimate dinners, celebrations, and corporate gatherings in downtown Tampa's newest upscale Mexican restaurant.",
-  alternates: { canonical: "/private-events" },
-  openGraph: {
-    title: "Private Events | La Victoria — Tampa",
-    description:
-      "Host your next private event at La Victoria. Intimate dinners, celebrations, and corporate gatherings in downtown Tampa.",
-    url: "/private-events",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Private Events | La Victoria — Tampa",
-    description:
-      "Host your next private event at La Victoria. Intimate dinners, celebrations, and corporate gatherings in downtown Tampa.",
-    images: ["/og-image.png"],
-  },
 };
 
 const breadcrumbSchema = {

@@ -17,6 +17,8 @@ const NAV_LINKS = [
 export default function ComingSoonNav() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  // The private /preview walkthrough renders the full-site Navigation instead.
+  const isPreview = pathname.startsWith("/preview");
   const isCareers = pathname === "/careers";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -84,6 +86,9 @@ export default function ComingSoonNav() {
 
   const hideLogo = isHome && !scrolled;
   const closeMobile = useCallback(() => setMobileOpen(false), []);
+
+  // Declared after every hook so hook order stays stable across routes.
+  if (isPreview) return null;
 
   return (
     <>

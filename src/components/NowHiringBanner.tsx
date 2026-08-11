@@ -9,7 +9,10 @@ export default function NowHiringBanner() {
   const bannerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  const hidden = !visible || pathname === "/careers";
+  // The private /preview walkthrough shows the full-site design, not the
+  // public coming-soon chrome.
+  const hidden =
+    !visible || pathname === "/careers" || pathname.startsWith("/preview");
 
   // Set CSS variable for banner height so nav and hero can offset
   useEffect(() => {

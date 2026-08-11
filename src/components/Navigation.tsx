@@ -5,16 +5,21 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
+// This nav belongs to the full-site design, which currently lives only in the
+// private /preview walkthrough. The public site uses ComingSoonNav instead.
+const PREVIEW_HOME = "/preview";
+
 const NAV_LINKS = [
-  { label: "Menus", href: "/menus" },
-  { label: "The Space", href: "/the-space" },
-  { label: "Private Events", href: "/private-events" },
-  { label: "Visit", href: "/contact" },
+  { label: "Menus", href: `${PREVIEW_HOME}/menus` },
+  { label: "The Space", href: `${PREVIEW_HOME}/the-space` },
+  { label: "Photos", href: `${PREVIEW_HOME}/photos` },
+  { label: "Private Events", href: `${PREVIEW_HOME}/private-events` },
+  { label: "Visit", href: `${PREVIEW_HOME}/visit` },
 ];
 
 export default function Navigation() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isHome = pathname === PREVIEW_HOME;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -29,7 +34,7 @@ export default function Navigation() {
 
   // On homepage, scroll to hash if present (handles /#space, /#story arrivals)
   useEffect(() => {
-    if (pathname !== "/") return;
+    if (pathname !== PREVIEW_HOME) return;
     const hash = window.location.hash;
     if (!hash) return;
     const timer = setTimeout(() => {
@@ -87,8 +92,8 @@ export default function Navigation() {
       setMobileOpen(false);
 
       // If already on homepage and clicking a homepage hash link, smooth scroll
-      if (pathname === "/" && href.startsWith("/#")) {
-        const hash = href.slice(1); // "/#space" -> "#space"
+      if (pathname === PREVIEW_HOME && href.startsWith(`${PREVIEW_HOME}/#`)) {
+        const hash = href.slice(PREVIEW_HOME.length + 1); // ".../#space" -> "#space"
         const target = document.querySelector(hash);
         if (target) {
           e.preventDefault();
@@ -118,7 +123,7 @@ export default function Navigation() {
         <div className="mx-auto flex items-center justify-between px-6 py-4 max-w-[1400px] md:px-10">
           {/* Wordmark */}
           <Link
-            href="/"
+            href={PREVIEW_HOME}
             aria-label="La Victoria — Home"
             className={`transition-opacity duration-[600ms] ${
               isHome && !scrolled ? "opacity-0" : "opacity-100"

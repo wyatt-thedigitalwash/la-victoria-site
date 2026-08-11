@@ -5,21 +5,6 @@ export const metadata: Metadata = {
   title: "Visit",
   description:
     "Find La Victoria at 105 W Tyler Street in downtown Tampa. View hours, get directions, and contact us for reservations.",
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: "Visit | La Victoria — Tampa",
-    description:
-      "Find La Victoria at 105 W Tyler Street in downtown Tampa. View hours, get directions, and contact us for reservations.",
-    url: "/contact",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Visit | La Victoria — Tampa",
-    description:
-      "Find La Victoria at 105 W Tyler Street in downtown Tampa. View hours, get directions, and contact us for reservations.",
-    images: ["/og-image.png"],
-  },
 };
 
 const HOURS = [

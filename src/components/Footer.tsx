@@ -1,12 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
+// Part of the full-site design, which currently lives only in the private
+// /preview walkthrough.
 const NAV_LINKS = [
-  { label: "Menus", href: "/menus" },
+  { label: "Menus", href: "/preview/menus" },
   { label: "Reservations", href: "#" },
-  { label: "Private Events", href: "/private-events" },
-  { label: "The Space", href: "/the-space" },
-  { label: "Visit", href: "/contact" },
+  { label: "Private Events", href: "/preview/private-events" },
+  { label: "The Space", href: "/preview/the-space" },
+  { label: "Photos", href: "/preview/photos" },
+  { label: "Visit", href: "/preview/visit" },
 ];
 
 export default function Footer() {
