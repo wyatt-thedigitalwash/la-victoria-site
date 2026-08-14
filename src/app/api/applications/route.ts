@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { supabaseAdmin } from "@/lib/supabase";
+import { OPEN_POSITIONS } from "@/lib/positions";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -24,6 +25,13 @@ export async function POST(request: Request) {
     if (!first_name || !last_name || !position || !email || !phone) {
       return NextResponse.json(
         { error: "All required fields must be filled out." },
+        { status: 400 }
+      );
+    }
+
+    if (!OPEN_POSITIONS.includes(position)) {
+      return NextResponse.json(
+        { error: "This position is no longer accepting applications." },
         { status: 400 }
       );
     }

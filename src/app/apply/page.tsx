@@ -2,19 +2,9 @@
 
 import { Suspense, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+import { OPEN_POSITIONS } from "@/lib/positions";
 
-const POSITIONS = [
-  "Sous Chef",
-  "Pastry Chef",
-  "Server",
-  "Bartender",
-  "Line Cook",
-  "Prep Cook",
-  "Guest Services",
-  "Server Assistant",
-  "General Utility",
-  "Barista",
-] as const;
+const POSITIONS = OPEN_POSITIONS;
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ACCEPTED_EXTENSIONS = [".pdf", ".doc", ".docx"];
@@ -43,9 +33,9 @@ function Label({ htmlFor, children }: { htmlFor: string; children: React.ReactNo
 function ApplyForm() {
   const searchParams = useSearchParams();
   const positionParam = searchParams.get("position") || "";
-  const initialPosition = (POSITIONS as readonly string[]).includes(positionParam)
-    ? positionParam
-    : "";
+  // A stale link to a now-closed role falls back to an empty select rather
+  // than prefilling a position that can no longer be submitted.
+  const initialPosition = POSITIONS.includes(positionParam) ? positionParam : "";
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

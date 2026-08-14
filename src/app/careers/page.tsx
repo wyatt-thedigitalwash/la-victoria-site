@@ -3,6 +3,7 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { isClosedPosition } from "@/lib/positions";
 
 const APPLY_HREF = "/apply";
 
@@ -966,30 +967,56 @@ export default function CareersPage() {
             <div className="mx-auto max-w-[900px] flex flex-col gap-4">
               {JOB_LISTINGS.map((job) => {
                 const isOpen = openJob === job.title;
+                const isClosed = isClosedPosition(job.title);
                 const panelId = `job-panel-${job.title.replace(/\s+/g, "-").toLowerCase()}`;
                 return (
                 <article
                   key={job.title}
                   className="rounded-[4px] p-8"
                   style={{
-                    background: "#F9F6F0",
+                    background: isClosed ? "#F4F1EB" : "#F9F6F0",
                     border: "1px solid rgba(124, 101, 51, 0.12)",
                   }}
                 >
-                  <a
-                    href={`${APPLY_HREF}?position=${encodeURIComponent(job.title)}`}
-                    className="group/title relative inline-block font-body text-[20px] font-medium transition-colors duration-300"
-                    style={{ color: "#4D1807" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#6B2410")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#4D1807")}
-                  >
-                    {job.title}
-                    <span
-                      className="absolute left-0 bottom-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 group-hover/title:scale-x-100"
-                      style={{ background: "#4D1807" }}
-                      aria-hidden="true"
-                    />
-                  </a>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                    {isClosed ? (
+                      <h2
+                        className="font-body text-[20px] font-medium"
+                        style={{ color: "rgba(77, 24, 7, 0.55)" }}
+                      >
+                        {job.title}
+                      </h2>
+                    ) : (
+                      <a
+                        href={`${APPLY_HREF}?position=${encodeURIComponent(job.title)}`}
+                        className="group/title relative inline-block font-body text-[20px] font-medium transition-colors duration-300"
+                        style={{ color: "#4D1807" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "#6B2410")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "#4D1807")}
+                      >
+                        {job.title}
+                        <span
+                          className="absolute left-0 bottom-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 group-hover/title:scale-x-100"
+                          style={{ background: "#4D1807" }}
+                          aria-hidden="true"
+                        />
+                      </a>
+                    )}
+
+                    {isClosed && (
+                      <span
+                        className="font-mono text-[10px] uppercase tracking-[1.5px]"
+                        style={{
+                          color: "#7C6533",
+                          border: "1px solid rgba(124, 101, 51, 0.35)",
+                          borderRadius: "2px",
+                          padding: "5px 10px",
+                        }}
+                      >
+                        Applications Closed
+                      </span>
+                    )}
+                  </div>
 
                   <div className="mt-3 flex flex-col gap-1.5">
                     {[
@@ -1073,18 +1100,28 @@ export default function CareersPage() {
                           </div>
                         ))}
 
-                        <a
-                          href={`${APPLY_HREF}?position=${encodeURIComponent(job.title)}`}
-                          className="inline-block font-mono text-[11px] uppercase tracking-[2px] mt-8 transition-[filter] duration-300 hover:brightness-110"
-                          style={{
-                            background: "#4D1807",
-                            color: "#FCE9C7",
-                            padding: "12px 32px",
-                            borderRadius: "2px",
-                          }}
-                        >
-                          Apply Now
-                        </a>
+                        {isClosed ? (
+                          <p
+                            className="font-body text-[13px] font-normal leading-[1.6] mt-8"
+                            style={{ color: "#7C6533" }}
+                          >
+                            This position is no longer accepting applications.
+                            Thank you to everyone who applied.
+                          </p>
+                        ) : (
+                          <a
+                            href={`${APPLY_HREF}?position=${encodeURIComponent(job.title)}`}
+                            className="inline-block font-mono text-[11px] uppercase tracking-[2px] mt-8 transition-[filter] duration-300 hover:brightness-110"
+                            style={{
+                              background: "#4D1807",
+                              color: "#FCE9C7",
+                              padding: "12px 32px",
+                              borderRadius: "2px",
+                            }}
+                          >
+                            Apply Now
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
