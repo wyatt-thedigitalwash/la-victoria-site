@@ -279,24 +279,6 @@ export default function Home() {
             )}
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className="csb-scroll absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-          <p
-            className="font-mono text-[10px] tracking-[4px] uppercase"
-            style={{ color: "rgba(244, 212, 124, 0.5)" }}
-          >
-            Discover
-          </p>
-          <div className="csb-chevron-group flex flex-col items-center gap-1" aria-hidden="true">
-            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" className="csb-chevron csb-chevron-1">
-              <path d="M1 1L6 5.5L11 1" stroke="#F4D47C" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" className="csb-chevron csb-chevron-2">
-              <path d="M1 1L6 5.5L11 1" stroke="#F4D47C" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </div>
       </section>
 
       {/* ── Text Reveal Sections ── */}
@@ -517,34 +499,6 @@ export default function Home() {
         .csb-notify {
           opacity: 0;
           animation: csb-fade-up 1s cubic-bezier(0, 0, 0.25, 1) 2s forwards;
-        }
-
-        .csb-scroll {
-          opacity: 0;
-          animation: csb-fade-up 1s cubic-bezier(0, 0, 0.25, 1) 2.5s forwards;
-        }
-
-        .csb-chevron {
-          opacity: 0.3;
-        }
-
-        .csb-chevron-1 {
-          animation: csb-chevron-drift 3s ease-in-out infinite 3s;
-        }
-
-        .csb-chevron-2 {
-          animation: csb-chevron-drift 3s ease-in-out infinite 3.4s;
-        }
-
-        @keyframes csb-chevron-drift {
-          0%, 100% {
-            opacity: 0.2;
-            transform: translateY(0);
-          }
-          50% {
-            opacity: 0.6;
-            transform: translateY(3px);
-          }
         }
 
         @keyframes csb-fade-up {
