@@ -54,7 +54,7 @@ export default function NowHiringBanner() {
               className="font-body text-[9px] md:text-[10px] font-normal"
               style={{ color: "rgba(252, 233, 199, 0.7)" }}
             >
-              Applications Open: Monday, June 29th @ 10am | Applications Close: Monday, August 24th @ 5pm
+              Applications Open: Monday, June 29th @ 10am
             </p>
           </div>
         </div>

@@ -820,7 +820,6 @@ const THRIVE_ELSEWHERE = [
 
 const TIMELINE = [
   { label: "Applications Open", date: "Monday, June 29th @ 10am" },
-  { label: "Applications Close", date: "Monday, August 24th @ 5pm" },
   { label: "Orientation Date", date: "Wednesday, October 7th" },
 ];
 
