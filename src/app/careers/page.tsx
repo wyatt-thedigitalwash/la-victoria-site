@@ -721,7 +721,7 @@ const JOB_LISTINGS = [
       {
         heading: "Compensation",
         items: [
-          "Hourly, non-exempt position, ranges from $17-$19/hour; eligible for overtime in accordance with applicable law.",
+          "Hourly, non-exempt position, ranges from $15-$17/hour; eligible for overtime in accordance with applicable law.",
         ],
       },
     ],
