@@ -23,7 +23,7 @@ export const ALL_POSITIONS = [
 
 export type Position = (typeof ALL_POSITIONS)[number];
 
-export const CLOSED_POSITIONS: readonly string[] = ["Server", "Bartender", "Barista", "Guest Services"];
+export const CLOSED_POSITIONS: readonly string[] = ["Server", "Bartender", "Barista"];
 
 export const OPEN_POSITIONS: readonly string[] = ALL_POSITIONS.filter(
   (title) => !CLOSED_POSITIONS.includes(title)
