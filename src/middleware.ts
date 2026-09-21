@@ -10,6 +10,7 @@ const PUBLIC_PATHS = new Set([
   "/photos",
   "/parking",
   "/private-dining",
+  "/tequila-lockers",
   "/reservations",
   "/favicon.ico",
   "/apple-touch-icon.png",

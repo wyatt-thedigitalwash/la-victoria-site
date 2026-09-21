@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Photos", href: "/photos" },
   { label: "Parking", href: "/parking" },
   { label: "Private Dining", href: "/private-dining" },
+  { label: "Tequila Lockers", href: "/tequila-lockers" },
   { label: "Careers", href: "/careers" },
   { label: "Reservations", href: "/reservations" },
 ];
@@ -123,7 +124,7 @@ export default function ComingSoonNav() {
           </Link>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <Link
@@ -148,7 +149,7 @@ export default function ComingSoonNav() {
           <button
             ref={hamburgerRef}
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex md:hidden flex-col justify-center items-center gap-1.5 w-8 h-8 cursor-pointer"
+            className="flex lg:hidden flex-col justify-center items-center gap-1.5 w-8 h-8 cursor-pointer"
             style={{ background: "none", border: "none" }}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -181,7 +182,7 @@ export default function ComingSoonNav() {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation menu"
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-opacity duration-500 md:hidden ${
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-opacity duration-500 lg:hidden ${
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
