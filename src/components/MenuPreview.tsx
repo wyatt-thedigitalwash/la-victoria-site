@@ -51,7 +51,7 @@ export default function MenuPreview() {
             </h2>
           </div>
           <Link
-            href="/menus"
+            href="/preview/menus"
             className="shrink-0 font-mono text-[11px] tracking-[2px] uppercase text-brass transition-colors duration-300 hover:text-cream"
           >
             Full Menu &rarr;

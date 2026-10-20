@@ -83,22 +83,16 @@ export default function ContactPage() {
                 Contact
               </h2>
 
-              <div className="mb-6">
+              <div className="mb-8">
                 <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-2">
                   Email
                 </p>
-                <p className="font-body text-[15px] text-cream">
-                  hello@lavictoriatampa.com
-                </p>
-              </div>
-
-              <div className="mb-8">
-                <p className="font-mono text-[11px] tracking-[2.5px] uppercase text-brass mb-2">
-                  Phone
-                </p>
-                <p className="font-body text-[15px] text-cream">
-                  (813) 555-0100
-                </p>
+                <a
+                  href="mailto:operations@lavictoriatampa.com"
+                  className="font-body text-[15px] text-cream transition-colors duration-300 hover:text-brass"
+                >
+                  operations@lavictoriatampa.com
+                </a>
               </div>
 
               <a
@@ -118,7 +112,9 @@ export default function ContactPage() {
 
             <div className="flex justify-center gap-6 mt-6">
               <a
-                href="#"
+                href="https://www.instagram.com/lavictoriatampa/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-body text-[13px] tracking-[1px] text-smoke transition-colors duration-300 hover:text-brass"
               >
                 Instagram

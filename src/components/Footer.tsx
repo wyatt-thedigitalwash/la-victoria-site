@@ -44,7 +44,9 @@ export default function Footer() {
         {/* Social links */}
         <div className="flex gap-6 mb-10">
           <a
-            href="#"
+            href="https://www.instagram.com/lavictoriatampa/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-body text-[13px] tracking-[1px] text-smoke transition-colors duration-300 hover:text-brass"
           >
             Instagram
