@@ -4,6 +4,7 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { isClosedPosition } from "@/lib/positions";
+import FooterHours from "@/components/FooterHours";
 
 const APPLY_HREF = "/apply";
 
@@ -1216,6 +1217,9 @@ export default function CareersPage() {
           >
             operations@lavictoriatampa.com
           </a>
+
+          {/* Hours */}
+          <FooterHours />
 
           {/* Copyright */}
           <p

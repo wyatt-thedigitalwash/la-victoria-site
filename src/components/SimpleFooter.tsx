@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FooterHours from "@/components/FooterHours";
 
 /** Minimal footer for standalone public pages while the full site is in preview. */
 export default function SimpleFooter({ note }: { note?: string }) {
@@ -40,6 +41,9 @@ export default function SimpleFooter({ note }: { note?: string }) {
       >
         operations@lavictoriatampa.com
       </a>
+
+      {/* Hours */}
+      <FooterHours />
       {note && (
         <p
           className="font-body text-[13px] font-normal mt-6"

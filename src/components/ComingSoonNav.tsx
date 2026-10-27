@@ -4,15 +4,16 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { RESERVE_HREF } from "@/lib/restaurant";
 
-const NAV_LINKS = [
+const NAV_LINKS: { label: string; href: string; external?: boolean }[] = [
   { label: "Menus", href: "/menus" },
   { label: "Photos", href: "/photos" },
   { label: "Parking", href: "/parking" },
   { label: "Private Dining", href: "/private-dining" },
   { label: "Tequila Lockers", href: "/tequila-lockers" },
   { label: "Careers", href: "/careers" },
-  { label: "Reservations", href: "/reservations" },
+  { label: "Reservations", href: RESERVE_HREF, external: true },
 ];
 
 export default function ComingSoonNav() {
@@ -129,6 +130,11 @@ export default function ComingSoonNav() {
               <li key={link.label}>
                 <Link
                   href={link.href}
+                  {...(link.external && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    "aria-label": `${link.label} on OpenTable (opens in new tab)`,
+                  })}
                   className="group relative font-body text-[10px] font-medium tracking-[2px] uppercase transition-colors duration-300"
                   style={{ color: "rgba(252, 233, 199, 0.7)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#FCE9C7")}
@@ -207,6 +213,11 @@ export default function ComingSoonNav() {
               <Link
                 href={link.href}
                 onClick={closeMobile}
+                {...(link.external && {
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  "aria-label": `${link.label} on OpenTable (opens in new tab)`,
+                })}
                 className="font-body text-[13px] font-medium tracking-[3px] uppercase transition-colors duration-300"
                 style={{ color: "#C4A882" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#FCE9C7")}

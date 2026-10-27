@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import FooterHours from "@/components/FooterHours";
+import { HOURS, RESERVE_HREF } from "@/lib/restaurant";
 
 const EXPERIENCES = [
   {
@@ -108,13 +110,43 @@ export default function Home() {
             Kitchen&ensp;&middot;&ensp;Crudo&ensp;&middot;&ensp;Cantina
           </p>
 
-          {/* Now open */}
-          <p
-            className="csb-notify font-mono text-[12px] tracking-[3px] uppercase mt-10"
-            style={{ color: "#FCE8C7" }}
-          >
-            Now Open
-          </p>
+          {/* Now open: hours + reservations */}
+          <div className="csb-notify mt-10 flex flex-col items-center">
+            <p
+              className="font-mono text-[12px] tracking-[3px] uppercase"
+              style={{ color: "#FCE8C7" }}
+            >
+              Now Open
+            </p>
+
+            <dl
+              className="mt-5 grid grid-cols-[auto_auto] gap-x-6 gap-y-1.5 font-mono text-[11px] tracking-[2px] uppercase"
+              aria-label="Hours"
+            >
+              {HOURS.map((row) => (
+                <div key={row.days} className="contents">
+                  <dt className="text-left" style={{ color: "#F4D47C" }}>
+                    {row.days}
+                  </dt>
+                  <dd className="text-right" style={{ color: "rgba(252, 233, 199, 0.8)" }}>
+                    {row.time}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <a
+              href={RESERVE_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Reserve a table on OpenTable (opens in new tab)"
+              className="group relative mt-8 inline-block font-mono text-[11px] tracking-[3px] uppercase border border-[rgba(244,212,124,0.4)] px-8 py-3.5 overflow-hidden transition-colors duration-500"
+              style={{ color: "#FCE9C7", background: "#4D1807" }}
+            >
+              <span className="absolute inset-0 origin-left scale-x-0 bg-[#5e1e0a] transition-transform duration-500 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
+              <span className="relative">Reserve a Table</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -226,6 +258,9 @@ export default function Home() {
         >
           operations@lavictoriatampa.com
         </a>
+
+        {/* Hours */}
+        <FooterHours />
 
         {/* Copyright */}
         <p
