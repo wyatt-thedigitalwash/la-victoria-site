@@ -819,8 +819,7 @@ const THRIVE_ELSEWHERE = [
 ];
 
 const TIMELINE = [
-  { label: "Applications Open", date: "Monday, June 29th @ 10am" },
-  { label: "Orientation Date", date: "Wednesday, October 7th" },
+  { label: "Applications", date: "Now Open" },
 ];
 
 export default function CareersPage() {

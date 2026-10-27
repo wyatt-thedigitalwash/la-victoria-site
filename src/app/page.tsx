@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 
 const EXPERIENCES = [
@@ -22,15 +22,7 @@ const EXPERIENCES = [
 ] as const;
 
 export default function Home() {
-  const [heroHeight, setHeroHeight] = useState<string>("100dvh");
-  const [formOpen, setFormOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [fading, setFading] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const heroRef = useRef<HTMLElement>(null);
   const revealRefs = useRef<HTMLElement[]>([]);
 
   const addRevealRef = useCallback((el: HTMLElement | null) => {
@@ -41,7 +33,7 @@ export default function Home() {
 
   /* Lock hero height on mount so mobile browser chrome changes don't cause reflow */
   useEffect(() => {
-    setHeroHeight(`${window.innerHeight}px`);
+    if (heroRef.current) heroRef.current.style.minHeight = `${window.innerHeight}px`;
   }, []);
 
   /* Scroll-driven text reveal: opacity and translateY based on viewport center proximity */
@@ -76,7 +68,7 @@ export default function Home() {
   return (
     <main id="main-content" style={{ background: "#221A0E" }}>
       {/* ── Hero ── */}
-      <section className="csb-hero relative flex items-center justify-center overflow-hidden" style={{ minHeight: heroHeight, paddingTop: "calc(var(--banner-height, 0px) + 56px)" }}>
+      <section ref={heroRef} className="csb-hero relative flex items-center justify-center overflow-hidden" style={{ minHeight: "100dvh", paddingTop: "calc(var(--banner-height, 0px) + 56px)" }}>
         {/* Background image */}
         <Image
           src="/assets/cactus-video.png"
@@ -116,168 +108,13 @@ export default function Home() {
             Kitchen&ensp;&middot;&ensp;Crudo&ensp;&middot;&ensp;Cantina
           </p>
 
-          {/* Get Notified button / expandable form */}
-          <div className="csb-notify mt-10">
-            {submitted ? (
-              <div className="csb-success flex flex-col items-center">
-                {/* Diamond accent */}
-                <div className="mb-4" style={{ color: "#F4D47C" }} aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 0L10 6L16 8L10 10L8 16L6 10L0 8L6 6Z" fill="currentColor" opacity="0.6" />
-                  </svg>
-                </div>
-                <p
-                  className="font-mono text-[12px] tracking-[3px] uppercase"
-                  style={{ color: "#F4D47C" }}
-                >
-                  You&apos;re on the list
-                </p>
-              </div>
-            ) : !formOpen ? (
-              <>
-                {/* Coming soon text */}
-                <p
-                  className="font-mono text-[12px] tracking-[3px] uppercase mb-6"
-                  style={{ color: "#FCE8C7" }}
-                >
-                  Coming Fall 2026
-                </p>
-
-                <button
-                  type="button"
-                  onClick={() => setFormOpen(true)}
-                  className="csb-notify-btn group relative inline-block font-mono text-[11px] tracking-[3px] uppercase border border-[rgba(244,212,124,0.4)] px-8 py-3.5 overflow-hidden transition-colors duration-500 cursor-pointer"
-                  style={{ color: "#FCE9C7", background: "transparent" }}
-                >
-                  <span className="absolute inset-0 origin-left scale-x-0 bg-[#4D1807] transition-transform duration-500 group-hover:scale-x-100" />
-                  <span className="relative">Get Notified</span>
-                </button>
-              </>
-            ) : (
-              <form
-                className={`csb-notify-form flex flex-col items-center w-full max-w-[440px]${fading ? " csb-form-fade-out" : ""}`}
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  if (!firstName.trim() || !lastName.trim() || !email.trim()) return;
-                  setSubmitting(true);
-                  try {
-                    const res = await fetch("/api/leads", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        first_name: firstName.trim(),
-                        last_name: lastName.trim(),
-                        email: email.trim(),
-                        phone: phone.trim() || null,
-                      }),
-                    });
-                    if (res.ok) {
-                      setFading(true);
-                      setTimeout(() => {
-                        setFormOpen(false);
-                        setSubmitted(true);
-                      }, 500);
-                    }
-                  } finally {
-                    setSubmitting(false);
-                  }
-                }}
-              >
-                <div
-                  className="w-full flex flex-col gap-3 rounded-lg backdrop-blur-md"
-                  style={{
-                    background: "rgba(26, 21, 8, 0.8)",
-                    padding: "40px",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <label htmlFor="notify-first-name" className="sr-only">First name</label>
-                  <input
-                    id="notify-first-name"
-                    type="text"
-                    placeholder="First Name"
-                    required
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
-                    style={{
-                      background: "#221C10",
-                      border: "1px solid rgba(124, 101, 51, 0.3)",
-                      color: "#FCE9C7",
-                      padding: "16px 20px",
-                    }}
-                  />
-                  <label htmlFor="notify-last-name" className="sr-only">Last name</label>
-                  <input
-                    id="notify-last-name"
-                    type="text"
-                    placeholder="Last Name"
-                    required
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
-                    style={{
-                      background: "#221C10",
-                      border: "1px solid rgba(124, 101, 51, 0.3)",
-                      color: "#FCE9C7",
-                      padding: "16px 20px",
-                    }}
-                  />
-                  <label htmlFor="notify-email" className="sr-only">Email address</label>
-                  <input
-                    id="notify-email"
-                    type="email"
-                    placeholder="Email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
-                    style={{
-                      background: "#221C10",
-                      border: "1px solid rgba(124, 101, 51, 0.3)",
-                      color: "#FCE9C7",
-                      padding: "16px 20px",
-                    }}
-                  />
-                  <label htmlFor="notify-phone" className="sr-only">Phone number (optional)</label>
-                  <input
-                    id="notify-phone"
-                    type="tel"
-                    placeholder="Phone (optional)"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full font-body text-[14px] font-normal rounded-none outline-none transition-colors duration-300 focus:border-[#F4D47C]"
-                    style={{
-                      background: "#221C10",
-                      border: "1px solid rgba(124, 101, 51, 0.3)",
-                      color: "#FCE9C7",
-                      padding: "16px 20px",
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full font-mono text-[11px] tracking-[2px] uppercase transition-colors duration-300 hover:bg-[#5e1e0a] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{
-                      background: "#4D1807",
-                      color: "#FCE9C7",
-                      padding: "16px 20px",
-                    }}
-                  >
-                    {submitting ? "Submitting..." : "Submit"}
-                  </button>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setFormOpen(false)}
-                  className="font-body text-[11px] font-normal cursor-pointer transition-opacity duration-300 hover:opacity-70 mt-3"
-                  style={{ color: "rgba(252, 233, 199, 0.5)", background: "none", border: "none" }}
-                >
-                  Cancel
-                </button>
-              </form>
-            )}
-          </div>
+          {/* Now open */}
+          <p
+            className="csb-notify font-mono text-[12px] tracking-[3px] uppercase mt-10"
+            style={{ color: "#FCE8C7" }}
+          >
+            Now Open
+          </p>
         </div>
       </section>
 
@@ -417,61 +254,6 @@ export default function Home() {
       </footer>
 
       <style jsx>{`
-        /* ── Form placeholder ── */
-        .csb-notify-form input::placeholder {
-          color: #7C6533;
-          opacity: 1;
-        }
-
-        /* ── Form transition (only on form open, not button return) ── */
-        .csb-notify-form {
-          animation: csb-notify-in 300ms cubic-bezier(0, 0, 0.25, 1) forwards;
-        }
-
-        .csb-form-fade-out {
-          animation: csb-form-out 300ms cubic-bezier(0.25, 0, 1, 1) forwards !important;
-        }
-
-        @keyframes csb-notify-in {
-          from {
-            opacity: 0;
-            transform: scale(0.96);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        @keyframes csb-form-out {
-          from {
-            opacity: 1;
-            transform: scale(1);
-          }
-          to {
-            opacity: 0;
-            transform: scale(0.97);
-          }
-        }
-
-        /* ── Success message reveal ── */
-        .csb-success {
-          opacity: 0;
-          transform: scale(0.95);
-          animation: csb-success-in 500ms cubic-bezier(0, 0, 0.25, 1) 200ms forwards;
-        }
-
-        @keyframes csb-success-in {
-          from {
-            opacity: 0;
-            transform: scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
         /* ── Hero animations ── */
         .csb-logo {
           opacity: 0;

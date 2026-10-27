@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | La Victoria — Tampa",
   },
   description:
-    "La Victoria brings upscale Mexican dining to downtown Tampa. Three experiences — Kitchen, Crudo, Cantina — at 105 W Tyler Street. Coming Summer 2026.",
+    "La Victoria brings upscale Mexican dining to downtown Tampa. Three experiences — Kitchen, Crudo, Cantina — at 105 W Tyler Street. Now open.",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "La Victoria",
     title: "La Victoria | Upscale Mexican Dining in Tampa",
     description:
-      "Three experiences — Kitchen, Crudo, Cantina — at 105 W Tyler Street in downtown Tampa. Coming Summer 2026.",
+      "Three experiences — Kitchen, Crudo, Cantina — at 105 W Tyler Street in downtown Tampa. Now open.",
     url: "/",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "La Victoria | Upscale Mexican Dining in Tampa",
     description:
-      "Three experiences — Kitchen, Crudo, Cantina — at 105 W Tyler Street in downtown Tampa. Coming Summer 2026.",
+      "Three experiences — Kitchen, Crudo, Cantina — at 105 W Tyler Street in downtown Tampa. Now open.",
     images: ["/og-image.png"],
   },
 };
