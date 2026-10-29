@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FooterHours from "@/components/FooterHours";
+import Hours from "@/components/Hours";
 
 /** Minimal footer for standalone public pages while the full site is in preview. */
 export default function SimpleFooter({ note }: { note?: string }) {
@@ -43,7 +43,7 @@ export default function SimpleFooter({ note }: { note?: string }) {
       </a>
 
       {/* Hours */}
-      <FooterHours />
+      <Hours variant="footer" />
       {note && (
         <p
           className="font-body text-[13px] font-normal mt-6"

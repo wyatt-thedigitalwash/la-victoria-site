@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { RESERVE_HREF } from "@/lib/restaurant";
+import { RESERVE } from "@/lib/restaurant";
 
 const NAV_LINKS: { label: string; href: string; external?: boolean }[] = [
   { label: "Menus", href: "/menus" },
@@ -13,7 +13,7 @@ const NAV_LINKS: { label: string; href: string; external?: boolean }[] = [
   { label: "Private Dining", href: "/private-dining" },
   { label: "Tequila Lockers", href: "/tequila-lockers" },
   { label: "Careers", href: "/careers" },
-  { label: "Reservations", href: RESERVE_HREF, external: true },
+  { label: "Reservations", href: RESERVE.href, external: RESERVE.external },
 ];
 
 export default function ComingSoonNav() {
