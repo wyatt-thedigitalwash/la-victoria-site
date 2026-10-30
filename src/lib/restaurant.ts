@@ -1,5 +1,6 @@
 /** OpenTable booking page. */
-export const OPENTABLE_URL = "https://www.opentable.com/r/la-victoria-tampa?ref=1068";
+export const OPENTABLE_URL =
+  "https://www.opentable.com/r/la-victoria-reservations-tampa?restref=1504894&lang=en-US&ot_source=Restaurant%20website";
 
 /**
  * OpenTable restaurant ID ("rid"), needed for the embedded booking widget.
@@ -7,7 +8,7 @@ export const OPENTABLE_URL = "https://www.opentable.com/r/la-victoria-tampa?ref=
  * page source of OPENTABLE_URL. While empty, reservation links go straight
  * to OpenTable; once set, they point to the on-site /reservations widget.
  */
-export const OPENTABLE_RID = "";
+export const OPENTABLE_RID = "1504894";
 
 export const RESERVE = OPENTABLE_RID
   ? { href: "/reservations", external: false }
