@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import BrandButton, { BUTTON_CLASS, ButtonFace } from "@/components/BrandButton";
 
 export default function Error({
   reset,
@@ -20,18 +20,10 @@ export default function Error({
         An unexpected error occurred.
       </p>
       <div className="flex gap-4">
-        <button
-          onClick={reset}
-          className="font-mono text-[11px] tracking-[2.5px] uppercase text-cream bg-terracotta border border-terracotta px-8 py-3.5 transition-all duration-300 hover:bg-terracotta-glow hover:border-terracotta-glow"
-        >
-          Try Again
+        <button onClick={reset} className={BUTTON_CLASS}>
+          <ButtonFace>Try Again</ButtonFace>
         </button>
-        <Link
-          href="/"
-          className="font-mono text-[11px] tracking-[2.5px] uppercase text-cream border border-brass/40 px-8 py-3.5 transition-all duration-300 hover:bg-terracotta hover:border-terracotta"
-        >
-          Go Home
-        </Link>
+        <BrandButton href="/">Go Home</BrandButton>
       </div>
     </main>
   );

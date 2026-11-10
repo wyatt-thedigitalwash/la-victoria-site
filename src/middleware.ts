@@ -12,6 +12,8 @@ const PUBLIC_PATHS = new Set([
   "/private-dining",
   "/tequila-lockers",
   "/reservations",
+  // Unlisted listings to-do list for the owner: reachable by link, noindex.
+  "/lv-tasks-7k2m",
   "/favicon.ico",
   "/apple-touch-icon.png",
   "/android-chrome-192x192.png",
@@ -51,6 +53,12 @@ export async function middleware(request: NextRequest) {
   }
 
   // --- Public site ---
+  if (pathname === "/lv-tasks-7k2m") {
+    const response = NextResponse.next();
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+    return response;
+  }
+
   if (
     PUBLIC_PATHS.has(pathname) ||
     PUBLIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import BrandButton from "@/components/BrandButton";
 import ScrollReveal from "@/components/ScrollReveal";
 import LockerRequestForm from "@/components/LockerRequestForm";
-import SimpleFooter from "@/components/SimpleFooter";
+import PageHero from "@/components/PageHero";
+import SiteFooter from "@/components/SiteFooter";
 
 const DESCRIPTION =
   "Reserve a private tequila locker at La Victoria in downtown Tampa. Lockers are limited. Request yours and our team will reach out personally.";
@@ -67,14 +69,6 @@ const breadcrumbSchema = {
   ],
 };
 
-function SectionLabel({ children }: { children: string }) {
-  return (
-    <p className="font-mono text-[11px] tracking-[4px] uppercase mb-5" style={{ color: "#F4D47C" }}>
-      {children}
-    </p>
-  );
-}
-
 function SectionHeading({ children, className = "" }: { children: string; className?: string }) {
   return (
     <h2
@@ -95,53 +89,33 @@ export default function TequilaLockersPage() {
       />
 
       {/* ── Hero ── */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-        <Image
-          src="/assets/tequila-lockers-wall.jpg"
-          alt="Wall of backlit oak tequila lockers with black frames at La Victoria"
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover object-[center_58%]"
-        />
-        {/* Dark overlay, fading into the page background at the bottom */}
-        <div className="absolute inset-0 bg-[#221A0E]/50" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,_rgba(34,26,14,0.5)_0%,_transparent_30%,_transparent_60%,_#221A0E_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,_rgba(34,26,14,0.7)_0%,_transparent_75%)]" />
-
-        <div
-          className="relative z-10 text-center max-w-[680px] pb-10"
-          style={{ paddingTop: "calc(var(--banner-height, 0px) + 72px)" }}
-        >
-          <div className="hero-subtitle" style={{ animationDelay: "0.2s" }}>
-            <SectionLabel>Tequila Lockers</SectionLabel>
-          </div>
-          <h1
-            className="hero-subtitle font-body text-[clamp(34px,5.5vw,56px)] font-light italic leading-[1.25] mb-6"
-            style={{ color: "#FCE9C7", animationDelay: "0.5s" }}
-          >
-            Your Bottle, Always Waiting
-          </h1>
-          <p
-            className="hero-subtitle font-body text-[16px] font-normal leading-[1.8] mx-auto max-w-[540px]"
-            style={{ color: "rgba(252, 233, 199, 0.8)", animationDelay: "0.9s" }}
-          >
-            A private, glass-front locker at La Victoria, reserved for your
-            bottle and ready whenever you are. Lockers are limited. Request
-            yours and we&apos;ll reach out personally.
-          </p>
-          <div className="hero-cta mt-10" style={{ animationDelay: "1.3s" }}>
-            <a
-              href="#request"
-              className="group relative inline-block font-mono text-[11px] tracking-[3px] uppercase border border-[rgba(244,212,124,0.4)] px-8 py-3.5 overflow-hidden"
-              style={{ color: "#FCE9C7" }}
-            >
-              <span className="absolute inset-0 origin-left scale-x-0 bg-[#4D1807] transition-transform duration-500 group-hover:scale-x-100" />
-              <span className="relative">Request a Locker</span>
-            </a>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Your Bottle, Always Waiting"
+        tall
+        background={
+          <>
+            <Image
+              src="/assets/tequila-lockers-wall.jpg"
+              alt="Wall of backlit oak tequila lockers with black frames at La Victoria"
+              fill
+              sizes="100vw"
+              priority
+              className="object-cover object-[center_58%]"
+            />
+            <div className="absolute inset-0" style={{ background: "rgba(34, 26, 14, 0.68)" }} />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_50%,_rgba(34,26,14,0.75)_0%,_transparent_75%)]" />
+          </>
+        }
+      >
+        <p className="font-body text-[16px] font-normal leading-[1.8] max-w-[540px]" style={{ color: "#FCE9C7" }}>
+          A private, glass-front locker at La Victoria, reserved for your bottle
+          and ready whenever you are. Lockers are limited. Request yours and
+          we&apos;ll reach out personally.
+        </p>
+        <BrandButton href="#request" className="mt-8">
+          Request a Locker
+        </BrandButton>
+      </PageHero>
 
       {/* ── The Lockers ── */}
       <section data-bg="dark" className="px-6 py-20 md:py-32">
@@ -279,7 +253,7 @@ export default function TequilaLockersPage() {
         </div>
       </section>
 
-      <SimpleFooter note="Please drink responsibly. Must be 21 or older." />
+      <SiteFooter note="Please drink responsibly. Must be 21 or older." />
     </main>
   );
 }

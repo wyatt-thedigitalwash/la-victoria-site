@@ -31,10 +31,9 @@ export default function ScrollReveal({
           observer.unobserve(el);
         }
       },
-      // threshold 0 so tall content reveals as soon as any edge enters the
-      // viewport; 0.15 could never be met on elements taller than the
-      // viewport, leaving them stuck at opacity 0 on small screens.
-      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
+      // Reveal as soon as any part is in frame. The 20px margin cancels the
+      // element's starting offset, which would otherwise hold it back.
+      { threshold: 0, rootMargin: "0px 0px 20px 0px" }
     );
 
     observer.observe(el);

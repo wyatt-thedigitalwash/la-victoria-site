@@ -3,7 +3,7 @@ import { HOURS } from "@/lib/restaurant";
 /**
  * Opening hours for each concept.
  * hero: one centered line per concept (rows stack on mobile).
- * footer: compact day/time grid per concept.
+ * footer: day/time grid per concept, stacked for a footer column.
  */
 export default function Hours({ variant }: { variant: "hero" | "footer" }) {
   if (variant === "hero") {
@@ -22,7 +22,7 @@ export default function Hours({ variant }: { variant: "hero" | "footer" }) {
                       &middot;
                     </span>
                   )}
-                  <span style={{ color: "rgba(252, 233, 199, 0.6)" }}>{row.days}</span>
+                  <span style={{ color: "rgba(252, 233, 199, 0.85)" }}>{row.days}</span>
                   <span style={{ color: "#FCE9C7" }}>&ensp;{row.time}</span>
                 </span>
               ))}
@@ -34,22 +34,22 @@ export default function Hours({ variant }: { variant: "hero" | "footer" }) {
   }
 
   return (
-    <div className="mt-6 flex flex-col md:flex-row items-center md:items-start justify-center gap-5 md:gap-10">
+    <div className="flex flex-col items-center md:items-start gap-5">
       {HOURS.map((group) => (
-        <div key={group.name} className="flex flex-col items-center">
-          <p className="font-mono text-[10px] font-bold tracking-[2.5px] uppercase mb-2" style={{ color: "rgba(244, 212, 124, 0.8)" }}>
+        <div key={group.name} className="flex flex-col items-center md:items-start">
+          <p className="font-display text-[16px] tracking-[3px] uppercase mb-3" style={{ color: "#F4D47C" }}>
             {group.name}
           </p>
           <dl
-            className="grid grid-cols-[auto_auto] gap-x-5 gap-y-1 font-mono text-[10px] tracking-[2px] uppercase"
-            aria-label={`${group.name} hours`}
+            className="grid grid-cols-[auto_auto] gap-x-5 gap-y-0.5 font-body text-[14px]"
+            aria-label={group.name}
           >
             {group.rows.map((row) => (
               <div key={row.days} className="contents">
-                <dt className="text-left" style={{ color: "rgba(252, 233, 199, 0.5)" }}>
+                <dt className="text-left" style={{ color: "rgba(252, 233, 199, 0.85)" }}>
                   {row.days}
                 </dt>
-                <dd className="text-right" style={{ color: "rgba(252, 233, 199, 0.65)" }}>
+                <dd className="text-right" style={{ color: "#FCE9C7" }}>
                   {row.time}
                 </dd>
               </div>

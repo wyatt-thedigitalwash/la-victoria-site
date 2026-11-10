@@ -3,6 +3,7 @@
 import { Suspense, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { OPEN_POSITIONS } from "@/lib/positions";
+import { BUTTON_CLASS, ButtonFace } from "@/components/BrandButton";
 
 const POSITIONS = OPEN_POSITIONS;
 
@@ -285,17 +286,8 @@ function ApplyForm() {
       </div>
 
       {/* Submit */}
-      <button
-        type="submit"
-        disabled={submitting}
-        className="w-full font-mono text-[12px] uppercase tracking-[2px] transition-colors duration-300 hover:bg-[#5e1e0a] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{
-          background: "#4D1807",
-          color: "#FCE9C7",
-          padding: "16px",
-        }}
-      >
-        {submitting ? "Submitting..." : "Submit Application"}
+      <button type="submit" disabled={submitting} className={`${BUTTON_CLASS} w-full`}>
+        <ButtonFace tone="dark">{submitting ? "Submitting..." : "Submit Application"}</ButtonFace>
       </button>
 
       {error && (

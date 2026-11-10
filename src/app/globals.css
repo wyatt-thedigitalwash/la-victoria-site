@@ -21,7 +21,7 @@
   --color-foreground: #FCE9C7;
 
   /* Fonts */
-  --font-display: "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-badhorse), "Montserrat", system-ui, -apple-system, sans-serif;
   --font-body: "Montserrat", system-ui, -apple-system, sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
   --font-sans: var(--font-body);
@@ -38,7 +38,6 @@
 :root {
   --background: #100E04;
   --foreground: #FCE9C7;
-  --banner-height: 56px;
 }
 
 body {
@@ -156,18 +155,152 @@ section[data-bg="surface"] + section[data-bg="surface"] {
   animation: scroll-pulse 2.5s ease-in-out infinite 2.5s;
 }
 
+/* ── Home hero logo: wordmark first, then each tagline word (see HeroLogo) ── */
+
+@keyframes hero-wordmark-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-wordmark {
+  opacity: 0;
+  animation: hero-wordmark-in cubic-bezier(0, 0, 0.25, 1) forwards;
+}
+
+.hero-word {
+  opacity: 0;
+  animation: hero-word-in cubic-bezier(0, 0, 0.25, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word,
+  .csb-notify {
+    animation-delay: 0s !important;
+  }
+}
+
+/* In this stylesheet, not styled-jsx, so it applies before the first paint */
+.csb-notify {
+  opacity: 0;
+  animation: hero-word-in 0.6s cubic-bezier(0, 0, 0.25, 1) 0.8s forwards;
+}
+
+/* Intro animations only play on arrival; see ComingSoonNav */
+html[data-navigated] .hero-wordmark,
+html[data-navigated] .hero-word,
+html[data-navigated] .csb-notify {
+  animation: none;
+  opacity: 1;
+}
+
 /* ── Scroll reveal ── */
 
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 800ms cubic-bezier(0, 0, 0.25, 1),
-              transform 800ms cubic-bezier(0, 0, 0.25, 1);
+  transform: translateY(20px);
+  transition: opacity 500ms cubic-bezier(0, 0, 0.25, 1),
+              transform 500ms cubic-bezier(0, 0, 0.25, 1);
 }
 
 .scroll-reveal-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.careers-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms cubic-bezier(0, 0, 0.25, 1),
+              transform 500ms cubic-bezier(0, 0, 0.25, 1);
+}
+
+.careers-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Triptych heading: lines fade in one after the other.
+   ScrollReveal supplies the trigger. ── */
+
+.triptych-heading.scroll-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.triptych-line {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1200ms cubic-bezier(0, 0, 0.25, 1),
+              transform 1200ms cubic-bezier(0, 0, 0.25, 1);
+}
+
+.triptych-line-late {
+  transition-delay: 350ms;
+}
+
+.scroll-reveal-visible .triptych-line {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .triptych-line {
+    transition-delay: 0s;
+  }
+}
+
+/* ── Photo wall: one mosaic drifting sideways (layout is in PhotoWall.tsx) ── */
+
+@keyframes photo-wall-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.photo-wall-row {
+  overflow: hidden;
+}
+
+.photo-wall-track {
+  display: flex;
+  width: max-content;
+  animation: photo-wall-drift 150s linear infinite;
+  will-change: transform;
+}
+
+/* No motion: a still row people can swipe, without the looping copy */
+@media (prefers-reduced-motion: reduce) {
+  .photo-wall-track {
+    animation: none;
+  }
+
+  .photo-wall-row {
+    overflow-x: auto;
+  }
+
+  /* !important: the mosaic sets display inline */
+  .photo-wall-duplicate {
+    display: none !important;
+  }
 }
 
 /* ── Philosophy section ── */

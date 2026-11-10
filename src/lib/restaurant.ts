@@ -14,10 +14,21 @@ export const RESERVE = OPENTABLE_RID
   ? { href: "/reservations", external: false }
   : { href: OPENTABLE_URL, external: true };
 
+/** Main site links, shared by the nav and footer. */
+export const NAV_LINKS: { label: string; href: string; external?: boolean }[] = [
+  { label: "Menus", href: "/menus" },
+  { label: "Photos", href: "/photos" },
+  { label: "Parking", href: "/parking" },
+  { label: "Private Dining", href: "/private-dining" },
+  { label: "Tequila Lockers", href: "/tequila-lockers" },
+  { label: "Careers", href: "/careers" },
+  { label: "Reservations", href: RESERVE.href, external: RESERVE.external },
+];
+
 /** Opening hours. Shown in the home hero and every footer. */
 export const HOURS = [
   {
-    name: "La Victoria",
+    name: "Hours",
     rows: [
       { days: "Mon–Thu", time: "4–10 PM" },
       { days: "Fri–Sat", time: "4–11 PM" },
@@ -25,7 +36,7 @@ export const HOURS = [
     ],
   },
   {
-    name: "La Victoria Cafe",
-    rows: [{ days: "Mon–Fri", time: "7 AM–2 PM" }],
+    name: "Cafe Hours",
+    rows: [{ days: "Mon–Fri", time: "9 AM–2 PM" }],
   },
 ] as const;

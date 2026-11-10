@@ -1,53 +1,37 @@
 import type { Metadata } from "next";
+import PhotoField from "@/components/PhotoField";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Photos",
   description:
-    "Our restaurant is coming to life every day. Check @lavictoriatampa on Instagram for a first look inside La Victoria.",
+    "See the food, cocktails, and dining room at La Victoria, upscale Mexican dining in downtown Tampa.",
   alternates: { canonical: "/photos" },
 };
 
 export default function PhotosPage() {
   return (
-    <main id="main-content" style={{ background: "#221A0E" }}>
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(77,24,7,0.18)_0%,_transparent_70%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(124,101,51,0.12)_0%,_transparent_70%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(244,212,124,0.08)_0%,_transparent_70%)]" />
-        </div>
+    <main id="main-content" className="overflow-x-clip pt-[96px]" style={{ background: "#221A0E" }}>
+      <h1 className="sr-only">Photos of La Victoria</h1>
 
-        <div className="relative z-10 text-center max-w-[600px]">
-          <p
-            className="font-mono text-[11px] tracking-[4px] uppercase mb-5"
-            style={{ color: "#F4D47C" }}
-          >
-            Photos
-          </p>
-          <h1
-            className="font-body text-[clamp(32px,5vw,48px)] font-light italic leading-[1.3] mb-6"
-            style={{ color: "#FCE9C7" }}
-          >
-            The Best Moments Are Still To Come
-          </h1>
-          <p
-            className="font-body text-[16px] font-normal leading-[1.8]"
-            style={{ color: "rgba(252, 233, 199, 0.7)" }}
-          >
-            Our restaurant is coming to life every day. Check{" "}
-            <a
-              href="https://www.instagram.com/lavictoriatampa/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors duration-300 hover:text-cream"
-              style={{ color: "#F4D47C" }}
-            >
-              @lavictoriatampa
-            </a>{" "}
-            on Instagram for a first look inside La Victoria.
-          </p>
-        </div>
-      </section>
+      {/* Two hand-placed compositions: only the one that fits the screen renders */}
+      <PhotoField layout="desktop" className="hidden md:block" />
+      <PhotoField layout="mobile" className="md:hidden" />
+
+      <p className="text-center font-body text-[14px] px-6 pt-14 pb-20" style={{ color: "rgba(252, 233, 199, 0.7)" }}>
+        Follow along on{" "}
+        <a
+          href="https://www.instagram.com/lavictoriatampa/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-4 transition-opacity duration-300 hover:opacity-80"
+          style={{ color: "#F4D47C" }}
+        >
+          Instagram<span className="sr-only"> (opens in new tab)</span>
+        </a>
+      </p>
+
+      <SiteFooter />
     </main>
   );
 }

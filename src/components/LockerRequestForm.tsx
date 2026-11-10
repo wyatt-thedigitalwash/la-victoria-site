@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
+import { BUTTON_CLASS, ButtonFace } from "@/components/BrandButton";
 
 const CONTACT_METHODS = ["Call", "Text", "Email"] as const;
 
@@ -245,13 +246,8 @@ export default function LockerRequestForm() {
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="w-full font-mono text-[11px] tracking-[2px] uppercase transition-colors duration-300 hover:bg-[#5e1e0a] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ background: "#4D1807", color: "#FCE9C7", padding: "16px 20px" }}
-      >
-        {submitting ? "Submitting..." : "Request a Locker"}
+      <button type="submit" disabled={submitting} className={`${BUTTON_CLASS} w-full`}>
+        <ButtonFace>{submitting ? "Submitting..." : "Request a Locker"}</ButtonFace>
       </button>
 
       <p

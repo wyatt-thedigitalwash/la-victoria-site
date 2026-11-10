@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
-import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { isClosedPosition } from "@/lib/positions";
-import Hours from "@/components/Hours";
+import BrandButton from "@/components/BrandButton";
+import PageHero from "@/components/PageHero";
+import SiteFooter from "@/components/SiteFooter";
 
 const APPLY_HREF = "/apply";
 
@@ -873,32 +874,7 @@ export default function CareersPage() {
 
   return (
     <main id="main-content">
-        {/* ── Hero (dark) ── */}
-        <div style={{ background: "#221A0E" }}>
-          <section className="careers-hero relative flex items-center justify-center overflow-hidden" style={{ height: "40vh", paddingTop: "56px" }}>
-            {/* Atmospheric gradient */}
-            <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_30%_50%,_rgba(77,24,7,0.18)_0%,_transparent_70%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_70%_30%,_rgba(124,101,51,0.12)_0%,_transparent_70%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_80%,_rgba(244,212,124,0.08)_0%,_transparent_70%)]" />
-            </div>
-
-            <div className="relative z-10 flex flex-col items-center text-center px-6">
-              <p
-                className="font-mono text-[11px] tracking-[4px] uppercase mb-5"
-                style={{ color: "#F4D47C" }}
-              >
-                Careers
-              </p>
-              <h1
-                className="font-body text-[clamp(32px,5vw,48px)] font-light italic leading-[1.3]"
-                style={{ color: "#FCE9C7" }}
-              >
-                Grow With Us
-              </h1>
-            </div>
-          </section>
-        </div>
+        <PageHero title="Careers" large borderSide="above" />
 
         {/* ── Content (white) ── */}
         <div style={{ background: "#FFFFFF" }}>
@@ -1108,18 +1084,14 @@ export default function CareersPage() {
                             Thank you to everyone who applied.
                           </p>
                         ) : (
-                          <a
+                          <BrandButton
                             href={`${APPLY_HREF}?position=${encodeURIComponent(job.title)}`}
-                            className="inline-block font-mono text-[11px] uppercase tracking-[2px] mt-8 transition-[filter] duration-300 hover:brightness-110"
-                            style={{
-                              background: "#4D1807",
-                              color: "#FCE9C7",
-                              padding: "12px 32px",
-                              borderRadius: "2px",
-                            }}
+                            tone="dark"
+                            small
+                            className="mt-8"
                           >
                             Apply Now
-                          </a>
+                          </BrandButton>
                         )}
                       </div>
                     </div>
@@ -1171,96 +1143,9 @@ export default function CareersPage() {
           </section>
         </div>
 
-        {/* ── Footer (dark) ── */}
-        <footer className="flex flex-col items-center text-center px-6 pt-15 pb-10" style={{ background: "#221A0E" }}>
-          {/* Separator */}
-          <div
-            className="w-full max-w-[200px] mb-20"
-            style={{ height: "1px", background: "rgba(124, 101, 51, 0.15)" }}
-            aria-hidden="true"
-          />
+        {/* ── Footer ── */}
+        <SiteFooter borderSide="below" />
 
-          {/* Icon */}
-          <Image
-            src="/assets/La-Victoria-icon-beige.webp"
-            alt="La Victoria icon"
-            width={40}
-            height={40}
-            className="mb-6"
-          />
-
-          {/* Social links */}
-          <a
-            href="https://www.instagram.com/lavictoriatampa/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-[11px] tracking-[2px] uppercase transition-opacity duration-300 hover:opacity-70"
-            style={{ color: "#F4D47C" }}
-            aria-label="Follow La Victoria on Instagram"
-          >
-            Instagram
-          </a>
-
-          {/* Address */}
-          <p
-            className="font-body text-[13px] font-normal mt-4"
-            style={{ color: "rgba(252, 233, 199, 0.6)" }}
-          >
-            105 W Tyler Street, Tampa, FL 33602
-          </p>
-
-          {/* Email */}
-          <a
-            href="mailto:operations@lavictoriatampa.com"
-            className="font-body text-[13px] font-normal mt-1 transition-opacity duration-300 hover:opacity-80"
-            style={{ color: "rgba(252, 233, 199, 0.6)" }}
-          >
-            operations@lavictoriatampa.com
-          </a>
-
-          {/* Hours */}
-          <Hours variant="footer" />
-
-          {/* Copyright */}
-          <p
-            className="font-body text-[13px] font-normal mt-6"
-            style={{ color: "rgba(252, 233, 199, 0.4)" }}
-          >
-            &copy; 2026 La Victoria
-          </p>
-
-          {/* Credit */}
-          <p
-            className="font-body text-[10px] font-normal mt-5"
-            style={{ color: "rgba(252, 233, 199, 0.3)" }}
-          >
-            Site by{" "}
-            <a
-              href="https://thedigitalwash.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors duration-300 hover:text-[rgba(252,233,199,0.6)]"
-              style={{ color: "inherit" }}
-            >
-              The Digital Wash
-            </a>
-          </p>
-        </footer>
-
-        <style jsx>{`
-          /* ── ScrollReveal ── */
-          .careers-reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 800ms cubic-bezier(0, 0, 0.25, 1),
-                        transform 800ms cubic-bezier(0, 0, 0.25, 1);
-          }
-
-          .careers-visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        `}</style>
     </main>
   );
 }

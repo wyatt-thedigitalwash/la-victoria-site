@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import BrandButton from "@/components/BrandButton";
 
 export default function NotFound() {
   return (
@@ -12,12 +12,7 @@ export default function NotFound() {
       <p className="font-body text-[15px] text-sand mb-10">
         The page you&apos;re looking for doesn&apos;t exist.
       </p>
-      <Link
-        href="/"
-        className="inline-block font-mono text-[11px] tracking-[2.5px] uppercase text-cream border border-brass/40 px-8 py-3.5 transition-all duration-300 hover:bg-terracotta hover:border-terracotta"
-      >
-        Go Home
-      </Link>
+      <BrandButton href="/">Go Home</BrandButton>
     </main>
   );
 }

@@ -1,54 +1,66 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { RESERVE } from "@/lib/restaurant";
+import { ReserveButton } from "@/components/BrandButton";
+import HeroBackground from "@/components/HeroBackground";
+import { NAV_LINKS, RESERVE } from "@/lib/restaurant";
 
-const NAV_LINKS: { label: string; href: string; external?: boolean }[] = [
-  { label: "Menus", href: "/menus" },
-  { label: "Photos", href: "/photos" },
-  { label: "Parking", href: "/parking" },
-  { label: "Private Dining", href: "/private-dining" },
-  { label: "Tequila Lockers", href: "/tequila-lockers" },
-  { label: "Careers", href: "/careers" },
-  { label: "Reservations", href: RESERVE.href, external: RESERVE.external },
-];
+const NAV_HEIGHT = 64;
+
+const PAGE_LINKS = NAV_LINKS.filter((link) => link.href !== RESERVE.href);
 
 export default function ComingSoonNav() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   // The private /preview walkthrough renders the full-site Navigation instead.
   const isPreview = pathname.startsWith("/preview");
-  const isCareers = pathname === "/careers";
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollState, setScrollState] = useState({ path: pathname, scrolled: false });
+  // A page change snaps straight to its new state instead of fading into it.
+  const settled = scrollState.path === pathname;
+  const scrolled = settled && scrollState.scrolled;
+  // The menu belongs to the page it was opened on, so a route change closes it in
+  // the same commit that shows the new page. Closing on tap would flash the old page.
+  const [menuPath, setMenuPath] = useState<string | null>(null);
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+  const mobileOpen = menuPath === pathname;
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
-  // Show background after scrolling past the hero
+  // Intro animations are for arriving at the site. After the first page change
+  // they're switched off, so moving between pages is one clean swap.
+  const firstPath = useRef(pathname);
+  useLayoutEffect(() => {
+    if (pathname !== firstPath.current) document.documentElement.dataset.navigated = "";
+  }, [pathname]);
+
+  // Show a background once the page has scrolled past its hero. Re-checked on
+  // every route change, because arriving at the top of a page fires no scroll event.
   useEffect(() => {
     const getThreshold = () => {
-      if (isHome) return window.innerHeight * 0.85;
-      // Find the first section/hero and use its bottom edge
-      const hero = document.querySelector("section");
-      if (hero) return hero.offsetTop + hero.offsetHeight - 60;
-      return 100;
+      const hero = document.querySelector("[data-nav-hero]");
+      if (!hero) return 40;
+      return hero.getBoundingClientRect().bottom + window.scrollY - NAV_HEIGHT;
     };
 
-    const onScroll = () => setScrolled(window.scrollY > getThreshold());
+    const onScroll = () => setScrollState({ path: pathname, scrolled: window.scrollY > getThreshold() });
     onScroll();
+    const frame = requestAnimationFrame(onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [pathname]);
 
   // Escape key closes mobile menu
   useEffect(() => {
     if (!mobileOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setMobileOpen(false);
+        setMenuPath(null);
         hamburgerRef.current?.focus();
       }
     };
@@ -86,8 +98,25 @@ export default function ComingSoonNav() {
     return () => menu.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
-  const hideLogo = isHome && !scrolled;
-  const closeMobile = useCallback(() => setMobileOpen(false), []);
+  // Keep the page still behind the open menu, and close it if the screen outgrows it
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => setMenuPath(null);
+    document.documentElement.style.overflow = "hidden";
+    desktop.addEventListener("change", onChange);
+    return () => {
+      document.documentElement.style.overflow = "";
+      desktop.removeEventListener("change", onChange);
+    };
+  }, [mobileOpen]);
+
+  const hideLogo = isHome && !scrolled && !mobileOpen;
+  const solid = scrolled && !mobileOpen;
+  const followLink = useCallback(
+    (href: string) => (href === pathname ? setMenuPath(null) : setPendingHref(href)),
+    [pathname]
+  );
 
   // Declared after every hook so hook order stays stable across routes.
   if (isPreview) return null;
@@ -96,66 +125,72 @@ export default function ComingSoonNav() {
     <>
       <nav
         aria-label="Main navigation"
-        className={`cs-nav fixed left-0 w-full z-50${scrolled ? " backdrop-blur-md" : ""}`}
+        className="cs-nav fixed left-0 w-full z-50"
         style={{
           top: "var(--banner-height, 0px)",
-          backgroundColor: scrolled ? "rgba(26, 21, 8, 0.85)" : "transparent",
-          borderBottom: scrolled ? "1px solid rgba(244, 212, 124, 0.1)" : "1px solid transparent",
-          transition: "background-color 600ms cubic-bezier(0.25,0.1,0.25,1), border-color 600ms cubic-bezier(0.25,0.1,0.25,1), top 300ms ease",
+          backgroundColor: solid ? "rgba(34, 26, 14, 0.96)" : "transparent",
+          borderBottom: solid ? "1px solid rgba(244, 212, 124, 0.15)" : "1px solid transparent",
+          transition: settled ? "background-color 300ms ease-out, border-color 300ms ease-out" : "none",
         }}
       >
-        <div className="flex items-center justify-between px-6 py-4 md:px-8">
+        <div className="flex items-center justify-between h-16 px-6 md:px-8">
           {/* Logo */}
           <Link
             href="/"
             aria-label="La Victoria — Home"
-            className="transition-opacity duration-500"
             style={{
+              transition: settled ? "opacity 300ms ease-out" : "none",
               opacity: hideLogo ? 0 : 1,
               pointerEvents: hideLogo ? "none" : "auto",
             }}
           >
             <Image
-              src="/assets/La-Victoria-09.webp"
+              src="/assets/la-victoria-horizontal-cream.svg"
               alt="La Victoria"
-              width={100}
-              height={24}
-              className="h-[24px] w-auto"
+              width={99}
+              height={32}
+              priority
             />
           </Link>
 
           {/* Desktop links */}
-          <ul className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  {...(link.external && {
-                    target: "_blank",
-                    rel: "noopener noreferrer",
-                    "aria-label": `${link.label} on OpenTable (opens in new tab)`,
-                  })}
-                  className="group relative font-body text-[10px] font-medium tracking-[2px] uppercase transition-colors duration-300"
-                  style={{ color: "rgba(252, 233, 199, 0.7)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FCE9C7")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(252, 233, 199, 0.7)")}
-                >
-                  {link.label}
-                  <span
-                    className="absolute left-0 -bottom-1 h-px w-full origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
-                    style={{ background: "#F4D47C" }}
-                    aria-hidden="true"
-                  />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden lg:flex items-center gap-7 xl:gap-9">
+            <ul className="flex items-center gap-6 xl:gap-8">
+              {PAGE_LINKS.map((link) => {
+                const current = pathname === link.href;
+                return (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      aria-current={current ? "page" : undefined}
+                      className="group relative font-body text-[11px] font-medium tracking-[1px] uppercase whitespace-nowrap transition-colors duration-300"
+                      style={{ color: current ? "#F4D47C" : "#FCE9C7" }}
+                    >
+                      {link.label}
+                      <span
+                        className={`absolute left-0 -bottom-1.5 h-px w-full origin-left transition-transform duration-300 group-hover:scale-x-100 ${
+                          current ? "scale-x-100" : "scale-x-0"
+                        }`}
+                        style={{ background: "#F4D47C" }}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <ReserveButton small />
+          </div>
 
           {/* Mobile hamburger */}
+
           <button
             ref={hamburgerRef}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex lg:hidden flex-col justify-center items-center gap-1.5 w-8 h-8 cursor-pointer"
+            onClick={() => {
+              setPendingHref(null);
+              setMenuPath(mobileOpen ? null : pathname);
+            }}
+            className="flex lg:hidden flex-col justify-center items-center gap-1.5 w-11 h-11 -mr-2.5 cursor-pointer"
             style={{ background: "none", border: "none" }}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -181,53 +216,60 @@ export default function ComingSoonNav() {
         </div>
       </nav>
 
-      {/* Mobile overlay */}
+      {/* Mobile menu */}
       <div
         ref={mobileMenuRef}
         id="cs-mobile-menu"
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation menu"
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-opacity duration-500 lg:hidden ${
-          mobileOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+        inert={!mobileOpen}
+        className={`fixed inset-0 z-40 transition-opacity duration-200 lg:hidden ${
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
-        style={{ background: "rgba(16, 14, 4, 0.98)", backdropFilter: "blur(4px)" }}
+        style={{ background: "#221A0E", WebkitTapHighlightColor: "transparent" }}
       >
-        <ul className="flex flex-col items-center gap-8">
-          <li>
-            <Link
-              href="/"
-              onClick={closeMobile}
-              className="font-body text-[13px] font-medium tracking-[3px] uppercase transition-colors duration-300"
-              style={{ color: "#C4A882" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#FCE9C7")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#C4A882")}
+        <HeroBackground lazy />
+        <div className="absolute inset-0 overflow-y-auto">
+          <div className="flex min-h-full flex-col items-center justify-center px-6 pt-20 pb-8 text-center">
+            <ul className="flex flex-col items-center gap-1">
+              {[{ label: "Home", href: "/" }, ...PAGE_LINKS].map((link) => {
+                // The tapped link lights up right away, while the new page loads
+                const active = (pendingHref ?? pathname) === link.href;
+                return (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      onClick={() => followLink(link.href)}
+                      aria-current={pathname === link.href ? "page" : undefined}
+                      className="inline-block py-2 font-body text-[22px] font-medium leading-[1.3]"
+                      style={{ color: active ? "#F4D47C" : "#FCE9C7" }}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <ReserveButton className="mt-8" onClick={() => followLink(RESERVE.href)} />
+
+            <div
+              className="mt-8 flex flex-col gap-1 font-body text-[13px]"
+              style={{ color: "rgba(252, 233, 199, 0.85)" }}
             >
-              Home
-            </Link>
-          </li>
-          {NAV_LINKS.map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                onClick={closeMobile}
-                {...(link.external && {
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                  "aria-label": `${link.label} on OpenTable (opens in new tab)`,
-                })}
-                className="font-body text-[13px] font-medium tracking-[3px] uppercase transition-colors duration-300"
-                style={{ color: "#C4A882" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#FCE9C7")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#C4A882")}
+              <p>105 W Tyler Street, Tampa, FL 33602</p>
+              <a
+                href="https://www.instagram.com/lavictoriatampa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow La Victoria on Instagram (opens in new tab)"
               >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                @lavictoriatampa
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

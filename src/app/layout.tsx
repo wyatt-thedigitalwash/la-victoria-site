@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Space_Mono } from "next/font/google";
-import NowHiringBanner from "@/components/NowHiringBanner";
+import localFont from "next/font/local";
 import ComingSoonNav from "@/components/ComingSoonNav";
 import "./globals.css";
 
@@ -15,6 +15,13 @@ const spaceMono = Space_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "700"],
+});
+
+const badhorse = localFont({
+  src: "../fonts/badhorse-regular-webfont.woff2",
+  variable: "--font-badhorse",
+  display: "swap",
+  preload: false, // only used below the fold
 });
 
 export const metadata: Metadata = {
@@ -62,7 +69,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${spaceMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      style={{ scrollBehavior: "smooth" }}
+      className={`${montserrat.variable} ${spaceMono.variable} ${badhorse.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
           <a href="#main-content" className="skip-to-content">
@@ -105,7 +114,6 @@ export default function RootLayout({
               }),
             }}
           />
-          <NowHiringBanner />
           <ComingSoonNav />
           {children}
         </body>
