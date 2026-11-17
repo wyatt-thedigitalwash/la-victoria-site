@@ -1,21 +1,73 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import PrivateDiningForm from "@/components/PrivateDiningForm";
+import ScrollReveal from "@/components/ScrollReveal";
+import SiteFooter from "@/components/SiteFooter";
+
+const DESCRIPTION =
+  "Private dining at La Victoria in downtown Tampa. A semi-private dining room for up to 36, the Bar Cove for up to 25, and large party tables. Send an inquiry.";
 
 export const metadata: Metadata = {
   title: "Private Dining",
-  description:
-    "From intimate dinners to special occasions, La Victoria is creating a space worth gathering in. Private dining details coming soon.",
+  description: DESCRIPTION,
   alternates: { canonical: "/private-dining" },
+  openGraph: {
+    title: "Private Dining | La Victoria — Tampa",
+    description: DESCRIPTION,
+    url: "/private-dining",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://lavictoriatampa.com" },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Private Dining",
+      item: "https://lavictoriatampa.com/private-dining",
+    },
+  ],
 };
 
 export default function PrivateDiningPage() {
   return (
     <main id="main-content" style={{ background: "#221A0E" }}>
-      <PageHero title="Celebrate With Us" tall border={false}>
-        <p className="font-body text-[16px] font-normal leading-[1.8] max-w-[560px]" style={{ color: "rgba(252, 233, 199, 0.85)" }}>
-          From intimate dinners to special occasions, we&apos;re creating a space worth gathering in. Private dining details are coming soon.
-        </p>
-      </PageHero>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
+      <PageHero title="Celebrate With Us" />
+
+      <section
+        id="inquire"
+        data-bg="dark"
+        className="px-6 pt-16 pb-24 md:pt-24 md:pb-32"
+        style={{ scrollMarginTop: "80px" }}
+      >
+        <div className="mx-auto max-w-[880px]">
+          <ScrollReveal className="triptych-heading text-center">
+            <p
+              className="triptych-line font-body text-[16px] leading-[1.8] mx-auto max-w-[600px]"
+              style={{ color: "rgba(252, 233, 199, 0.7)" }}
+            >
+              Our semi-private dining room seats up to 36 and the Bar Cove holds
+              up to 25. For bigger groups, we can set a long table in the dining
+              room. Tell us what you have in mind and our events team will
+              follow up.
+            </p>
+          </ScrollReveal>
+
+          <div className="mt-12">
+            <PrivateDiningForm />
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter />
     </main>
   );
 }
