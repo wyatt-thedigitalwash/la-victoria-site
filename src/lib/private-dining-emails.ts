@@ -36,7 +36,7 @@ export function formatEventDate(isoDate: string): string {
 function tripleseatNotice(result: TripleseatResult): string {
   const [color, text] =
     result.status === "sent"
-      ? ["#9FBF8F", "Added to TripleSeat."]
+      ? ["#9FBF8F", result.submissionId ? `Sent to TripleSeat (submission #${result.submissionId}).` : "Sent to TripleSeat."]
       : result.status === "skipped"
         ? ["#E8C27A", `Not sent to TripleSeat (${result.reason}). Please add this lead manually.`]
         : ["#E8A08A", `TripleSeat did not accept this lead (${result.error}). Please add it manually.`];

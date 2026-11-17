@@ -42,7 +42,7 @@ export interface TripleseatLeadFields {
 }
 
 export type TripleseatResult =
-  | { status: "sent"; leadId: string | null }
+  | { status: "sent"; submissionId: string | null }
   | { status: "skipped"; reason: string }
   | { status: "failed"; error: string };
 
@@ -76,8 +76,8 @@ export async function submitTripleseatLead(
     const json = await res.json().catch(() => null);
 
     if (res.ok && json?.success !== false) {
-      const leadId = json?.lead_id ?? json?.id ?? null;
-      return { status: "sent", leadId: leadId == null ? null : String(leadId) };
+      const submissionId = json?.submission_id ?? null;
+      return { status: "sent", submissionId: submissionId == null ? null : String(submissionId) };
     }
 
     const detail = Array.isArray(json?.errors) ? json.errors.join("; ") : json?.message;
