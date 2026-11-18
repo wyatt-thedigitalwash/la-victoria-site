@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SiteFooter from "@/components/SiteFooter";
 
 const DESCRIPTION =
-  "Private dining at La Victoria in downtown Tampa. A semi-private dining room for up to 36, the Bar Cove for up to 25, and large party tables. Send an inquiry.";
+  "Private dining at La Victoria in downtown Tampa. A semi-private dining room for up to 36 and large party tables. For parties larger than 12, send an inquiry.";
 
 export const metadata: Metadata = {
   title: "Private Dining",
@@ -54,10 +54,8 @@ export default function PrivateDiningPage() {
               className="triptych-line font-body text-[16px] leading-[1.8] mx-auto max-w-[600px]"
               style={{ color: "rgba(252, 233, 199, 0.7)" }}
             >
-              Our semi-private dining room seats up to 36 and the Bar Cove holds
-              up to 25. For bigger groups, we can set a long table in the dining
-              room. Tell us what you have in mind and our events team will
-              follow up.
+              For reservations larger than 12, please fill out the form below
+              and our private dining manager will be in touch.
             </p>
           </ScrollReveal>
 

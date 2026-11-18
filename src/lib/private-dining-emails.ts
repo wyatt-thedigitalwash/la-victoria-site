@@ -102,7 +102,7 @@ export function privateDiningConfirmationEmail(inquiry: PrivateDiningInquiry): s
           </tr>
           <tr>
             <td align="center" style="padding-top:16px;">
-              <p style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:#C4A882;line-height:1.6;margin:0;">We have your inquiry for ${escapeHtml(formatEventDate(inquiry.event_date))}, ${inquiry.guest_count} guests. Our events team will be in touch soon with availability and next steps.</p>
+              <p style="font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:#C4A882;line-height:1.6;margin:0;">We have your inquiry for ${escapeHtml(formatEventDate(inquiry.event_date))}, ${inquiry.guest_count} guests. Our private dining manager will be in touch soon with availability and next steps.</p>
             </td>
           </tr>`);
 }

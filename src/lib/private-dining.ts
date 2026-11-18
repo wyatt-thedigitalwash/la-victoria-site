@@ -16,7 +16,6 @@ export const EVENT_STYLE_LABELS = {
  */
 export const SPACES = [
   { label: "Semi-Private Dining Room (up to 36)", eventStyle: "onpremise" },
-  { label: "Bar Cove (up to 25)", eventStyle: "onpremise" },
   { label: "Large party in the dining room", eventStyle: "largeparty" },
   { label: "Not sure yet", eventStyle: "onpremise" },
 ] as const;

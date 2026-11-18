@@ -99,7 +99,7 @@ export default function PrivateDiningForm() {
           Thank you, {values.first_name.trim()}.
         </p>
         <p className="font-body text-[15px] leading-[1.8] mt-2" style={{ color: "rgba(252, 233, 199, 0.7)" }}>
-          We have your inquiry. Our events team will be in touch soon.
+          We have your inquiry. Our private dining manager will be in touch soon.
         </p>
       </div>
     );
