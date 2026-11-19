@@ -7,13 +7,11 @@ export interface PrivateDiningInquiry {
   email: string;
   phone: string;
   company: string;
-  event_style: string;
   occasion: string;
   event_date: string;
   start_time: string;
   end_time: string;
   guest_count: number;
-  space_preference: string;
   notes: string;
   referral_source: string;
 }
@@ -75,11 +73,10 @@ export function privateDiningNotificationEmail(
                 ${detailRow("Email", `<a href="mailto:${email}" style="color:#F4D47C;text-decoration:none;">${email}</a>`)}
                 ${detailRow("Phone", `<a href="tel:${phone}" style="color:#F4D47C;text-decoration:none;">${phone}</a>`)}
                 ${inquiry.company ? detailRow("Company", escapeHtml(inquiry.company)) : ""}
-                ${detailRow("Event", escapeHtml(`${inquiry.occasion} · ${inquiry.event_style}`))}
+                ${detailRow("Occasion", escapeHtml(inquiry.occasion))}
                 ${detailRow("Date", escapeHtml(formatEventDate(inquiry.event_date)))}
                 ${detailRow("Time", escapeHtml(time))}
                 ${detailRow("Guests", String(inquiry.guest_count))}
-                ${inquiry.space_preference ? detailRow("Space", escapeHtml(inquiry.space_preference)) : ""}
                 ${inquiry.notes ? detailRow("Details", multiline(inquiry.notes)) : ""}
                 ${inquiry.referral_source ? detailRow("Heard About Us", escapeHtml(inquiry.referral_source)) : ""}
               </table>

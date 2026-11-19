@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import {
-  EVENT_STYLE_LABELS,
+  EVENT_STYLE,
   MAX_GUESTS,
   NOTES_MAX_LENGTH,
   OCCASIONS,
   OTHER_REFERRAL_ID,
   REFERRAL_SOURCES,
-  SPACES,
   TIME_SLOTS,
   todayInTampa,
 } from "@/lib/private-dining";
@@ -77,7 +76,6 @@ export async function POST(request: Request) {
     const email = field(body.email, 200);
     const phone = field(body.phone, 40);
     const company = field(body.company, 120);
-    const space = SPACES.find((s) => s.label === body.space);
     const occasion = OCCASIONS.find((o) => o === body.occasion);
     const event_date = field(body.event_date, 10);
     const startSlot = TIME_SLOTS.findIndex((t) => t.value === body.start_time);
@@ -99,7 +97,6 @@ export async function POST(request: Request) {
     if (phoneDigits.length < 10 || phoneDigits.length > 15) {
       return badRequest("Please enter a valid phone number.");
     }
-    if (!space) return badRequest("Please choose a space.");
     if (!occasion) return badRequest("Please choose the occasion.");
     if (!isBookableDate(event_date)) {
       return badRequest("Please choose a date between today and two years from now.");
@@ -132,13 +129,11 @@ export async function POST(request: Request) {
       email,
       phone,
       company,
-      event_style: EVENT_STYLE_LABELS[space.eventStyle],
       occasion,
       event_date,
       start_time: start.label,
       end_time: end?.label ?? "",
       guest_count,
-      space_preference: space.label,
       notes,
       referral_source: referral
         ? referralOther ? `${referral.label}: ${referralOther}` : referral.label
@@ -154,11 +149,6 @@ export async function POST(request: Request) {
       gclid: field(body.gclid, 300),
     };
 
-    // TripleSeat has no field for the room, so it leads the notes.
-    const additional_information = [`Space: ${space.label}`, notes]
-      .filter(Boolean)
-      .join("\n\n");
-
     const tripleseat = await submitTripleseatLead({
       first_name,
       last_name,
@@ -166,13 +156,13 @@ export async function POST(request: Request) {
       phone,
       company,
       location_id: TRIPLESEAT_LOCATION_ID,
-      event_style: space.eventStyle,
+      event_style: EVENT_STYLE,
       nature_of_event: occasion,
       event_date,
       start_time: start.value,
       end_time: end?.value,
       guest_count: String(guest_count),
-      additional_information,
+      additional_information: notes,
       referral_source_id: referral?.id,
       referral_source_other: referralOther,
       ...utm,

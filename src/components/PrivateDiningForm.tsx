@@ -10,7 +10,6 @@ import {
   OCCASIONS,
   OTHER_REFERRAL_ID,
   REFERRAL_SOURCES,
-  SPACES,
   TIME_SLOTS,
   todayInTampa,
 } from "@/lib/private-dining";
@@ -25,7 +24,6 @@ const EMPTY = {
   event_date: "",
   start_time: "",
   end_time: "",
-  space: "",
   notes: "",
   referral_source_id: "",
   referral_source_other: "",
@@ -106,6 +104,7 @@ export default function PrivateDiningForm() {
   }
 
   const startIndex = TIME_SLOTS.findIndex((t) => t.value === values.start_time);
+  const referralOther = values.referral_source_id === OTHER_REFERRAL_ID;
 
   return (
     <form onSubmit={handleSubmit} className="text-left" style={{ colorScheme: "dark" }}>
@@ -173,20 +172,15 @@ export default function PrivateDiningForm() {
           </select>
         </Cell>
 
-        <Cell label="Space" className="col-span-6 md:col-span-3">
-          <select {...selectProps("space")} required>
-            <option value="" disabled>Select</option>
-            {SPACES.map((s) => <option key={s.label} value={s.label}>{s.label}</option>)}
-          </select>
-        </Cell>
-        <Cell label="Heard About Us" className="col-span-6 md:col-span-3">
+        {/* Full width, or half when "Other" adds the Where? box beside it */}
+        <Cell label="Heard About Us" className={`col-span-6 ${referralOther ? "md:col-span-3" : ""}`}>
           <select {...selectProps("referral_source_id")}>
             <option value="">Select</option>
             {REFERRAL_SOURCES.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
           </select>
         </Cell>
-        {values.referral_source_id === OTHER_REFERRAL_ID && (
-          <Cell label="Where?" className="col-span-6">
+        {referralOther && (
+          <Cell label="Where?" className="col-span-6 md:col-span-3">
             <input {...bind("referral_source_other")} type="text" maxLength={200} className={`${CONTROL} h-7`} />
           </Cell>
         )}

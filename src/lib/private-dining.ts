@@ -4,21 +4,12 @@
  * picks from. The values match TripleSeat Dynamic Lead Form 7051.
  */
 
-/** TripleSeat only accepts these two event styles for this location. */
-export const EVENT_STYLE_LABELS = {
-  onpremise: "Private Event",
-  largeparty: "Large Party",
-} as const;
-
 /**
- * One question covers both TripleSeat's event style and the room, so guests
- * don't have to answer two. Rooms and capacities match TripleSeat.
+ * TripleSeat requires an event style: "onpremise" (Private Event) or
+ * "largeparty" (Large Party). The form doesn't ask, so every inquiry comes in
+ * as a Private Event and the team can change it in TripleSeat.
  */
-export const SPACES = [
-  { label: "Semi-Private Dining Room (up to 36)", eventStyle: "onpremise" },
-  { label: "Large party in the dining room", eventStyle: "largeparty" },
-  { label: "Not sure yet", eventStyle: "onpremise" },
-] as const;
+export const EVENT_STYLE = "onpremise";
 
 /** Goes to TripleSeat's "Nature of this Event" field, which allows 50 characters at most. */
 export const OCCASIONS = [
