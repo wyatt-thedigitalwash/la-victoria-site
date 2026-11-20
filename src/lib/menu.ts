@@ -1,4 +1,4 @@
-/** Dinner menu, from the client's printed menu (photo received 2026-11-05). */
+/** Dinner menu, from the client's printed menu (updated from photos received 2026-11-19). */
 
 export interface MenuItem {
   name: string;
@@ -9,6 +9,8 @@ export interface MenuItem {
   /** Priced per protein, e.g. fajitas. */
   options?: { name: string; price: string }[];
   addOns?: { name: string; price: string }[];
+  /** Pick-one line shown in italics, e.g. "Your choice of carnitas or chorizo". */
+  choice?: string;
 }
 
 export interface MenuSection {
@@ -60,14 +62,14 @@ export const DINNER_MENU: MenuSection[] = [
     items: [
       { name: "Oxtail Birria Consomé", price: "36", desc: "Consomé, blue corn tortillas" },
       { name: "Carne Asada & Bone Marrow Tacos", price: "34", desc: "Prime New York Strip, bone marrow" },
-      { name: "Chile Relleno", price: "31", desc: "Corn queso, cilantro lime rice, mole verde" },
+      { name: "Chile Relleno", price: "26", desc: "Corn queso, cilantro lime rice, mole verde" },
       { name: "Pollo Asado", price: "29", desc: "Achiote, consomé, Mexican rice" },
       {
         name: "Quesadillas",
         desc: "Queso Oaxaca, salsa roja, guacamole",
         options: [
           { name: "Chicken Tinga", price: "21" },
-          { name: "Camarón", price: "23" },
+          { name: "Chorizo", price: "23" },
           { name: "Carne Asada", price: "25" },
         ],
       },
@@ -89,7 +91,6 @@ export const DINNER_MENU: MenuSection[] = [
           { name: "Carne Asada", price: "32" },
         ],
       },
-      { name: "Pork Belly", price: "36", desc: "Chicharrón, jus lié, charred pineapple" },
       { name: "Duck Mole", price: "44", desc: "Duck confit, dry-aged duck breast, mole negro" },
       { name: "Filet Mignon", price: "49", desc: "8 oz Prime filet mignon, Mexican rice, refried beans" },
     ],
@@ -97,12 +98,11 @@ export const DINNER_MENU: MenuSection[] = [
   {
     id: "complementos",
     title: "Complementos",
-    price: "5",
     items: [
-      { name: "Refried Beans" },
-      { name: "Abuela’s Chili" },
-      { name: "Mexican Rice" },
-      { name: "Cilantro Lime Rice" },
+      { name: "Refried Beans", price: "5" },
+      { name: "Mexican Rice", price: "5" },
+      { name: "Tortillas", price: "4" },
+      { name: "Fajita Veggies", price: "4" },
     ],
   },
   {
@@ -128,3 +128,18 @@ export const MENU_HIGHLIGHTS = [
   "Oxtail Birria Consomé",
   "Duck Mole",
 ];
+
+/** A drinks or café heading such as "Vino", made of smaller lists such as "Blanco". */
+export interface MenuGroup {
+  id: string;
+  title: string;
+  /** The printed menu's own introduction, where it has one. */
+  intro?: string;
+  sections: {
+    /** Omitted when the group is a single list, e.g. "Refrescos". */
+    title?: string;
+    /** Shown beside the title, e.g. what two prices mean. */
+    note?: string;
+    items: MenuItem[];
+  }[];
+}

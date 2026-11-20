@@ -3,14 +3,16 @@ import type { MenuItem } from "@/lib/menu";
 const GOLD = "#F4D47C";
 const MUTED = "rgba(252, 233, 199, 0.7)";
 
-export default function MenuItemRow({ item }: { item: MenuItem }) {
+/** `level` keeps headings in order: 3 under a course title, 4 under a drinks list title. */
+export default function MenuItemRow({ item, level = 3 }: { item: MenuItem; level?: 3 | 4 }) {
+  const Name = level === 3 ? "h3" : "h4";
   return (
     <li className="py-5" style={{ borderBottom: "1px solid rgba(124, 101, 51, 0.2)" }}>
       <div className="flex items-baseline gap-3">
-        <h3 className="font-body text-[17px] md:text-[18px] font-medium leading-snug text-cream">
+        <Name className="font-body text-[17px] md:text-[18px] font-medium leading-snug text-cream">
           {item.name}
           {item.raw && <span style={{ color: GOLD }}>*</span>}
-        </h3>
+        </Name>
         {item.price && (
           <>
             <span
@@ -35,6 +37,12 @@ export default function MenuItemRow({ item }: { item: MenuItem }) {
               </span>
             </span>
           ))}
+        </p>
+      )}
+
+      {item.choice && (
+        <p className="font-body text-[14px] italic leading-[1.5] mt-1.5" style={{ color: MUTED }}>
+          {item.choice}
         </p>
       )}
 

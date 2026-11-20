@@ -2,21 +2,27 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import CourseIcons from "@/components/CourseIcons";
 import HomeReservation from "@/components/HomeReservation";
+import MenuGroups from "@/components/MenuGroups";
 import MenuItemRow from "@/components/MenuItemRow";
+import MenuSwitcher from "@/components/MenuSwitcher";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import SiteFooter from "@/components/SiteFooter";
+import { CAFE_MENU } from "@/lib/cafe-menu";
+import { DRINKS_MENU } from "@/lib/drinks-menu";
 import { DINNER_MENU, RAW_ADVISORY, type MenuSection } from "@/lib/menu";
+import { HOURS } from "@/lib/restaurant";
 
 export const metadata: Metadata = {
   title: "Menus",
   description:
-    "The dinner menu at La Victoria in downtown Tampa: botanas, crudo, tacos clásicos, platos fuertes, and postres.",
+    "Dinner, drinks and café menus at La Victoria in downtown Tampa: botanas, crudo, tacos, platos fuertes, cocktails, wine, cerveza, coffee and breakfast.",
   alternates: { canonical: "/menus" },
 };
 
 const GOLD = "#F4D47C";
 const MUTED = "rgba(252, 233, 199, 0.7)";
+const CAFE_HOURS = HOURS.find((h) => h.name === "Cafe Hours") ?? HOURS[0];
 
 /** Clears the fixed nav, including while a course is still sliding into place. */
 const JUMP_OFFSET = "150px";
@@ -123,15 +129,12 @@ function Block({ sections, photo }: { sections: MenuSection[]; photo?: Photo }) 
   );
 }
 
-export default function MenusPage() {
+function DinnerMenu() {
   return (
-    <main id="main-content" style={{ background: "#221A0E" }}>
-      <PageHero title="Our Menu" large />
-
+    <>
       {/* ── Course links ── */}
       <CourseIcons />
 
-      {/* ── Menu ── */}
       <div className="mx-auto max-w-[1200px] px-6 pt-16 md:pt-24 pb-14 flex flex-col gap-20 md:gap-28">
         {BLOCKS.map((block) => (
           <Block
@@ -148,6 +151,42 @@ export default function MenusPage() {
       >
         <span style={{ color: GOLD }}>*</span> {RAW_ADVISORY}
       </p>
+    </>
+  );
+}
+
+export default function MenusPage() {
+  return (
+    <main id="main-content" style={{ background: "#221A0E" }}>
+      <PageHero title="Our Menu" large />
+
+      <MenuSwitcher
+        tabs={[
+          { id: "dinner", label: "Dinner", content: <DinnerMenu /> },
+          {
+            id: "drinks",
+            label: "Drinks",
+            content: (
+              <div className="mx-auto max-w-[1200px] px-6 pt-16 md:pt-24 pb-14">
+                <MenuGroups groups={DRINKS_MENU} />
+              </div>
+            ),
+          },
+          {
+            id: "cafe",
+            label: "Café",
+            content: (
+              <div className="mx-auto max-w-[1200px] px-6 pt-16 md:pt-24 pb-14">
+                <p className="font-mono text-[11px] tracking-[4px] uppercase text-center mb-16" style={{ color: GOLD }}>
+                  La Victoria Café&ensp;·&ensp;
+                  {CAFE_HOURS.rows.map((row) => `${row.days} ${row.time}`).join(", ")}
+                </p>
+                <MenuGroups groups={CAFE_MENU} />
+              </div>
+            ),
+          },
+        ]}
+      />
 
       {/* ── Reservation ── */}
       <HomeReservation />
